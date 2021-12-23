@@ -8,7 +8,10 @@ import Register from './pages/Register';
 import DashboardApp from './pages/DashboardApp';
 import User from './pages/User';
 import NotFound from './pages/Page404';
-
+import Profile from './pages/Profile';
+import DoctorProfile from './pages/DoctorProfile';
+import Appointments from './pages/Appointments';
+import MakeAppointment from './pages/MakeAppointment';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -17,9 +20,13 @@ export default function Router() {
       path: '/dashboard',
       element: <DashboardLayout />,
       children: [
-        { element: <Navigate to="/dashboard/user" replace /> },
+        { element: <Navigate to="/dashboard/profile" replace /> },
         { path: 'user', element: <User /> },
-        { path: 'app', element: <DashboardApp /> }
+        { path: 'app', element: <DashboardApp /> },
+        { path: 'appointments', element: <Appointments /> },
+        { path: 'appointment', element: <MakeAppointment /> },
+        { path: 'profile', element: <Profile /> },
+        { path: 'doctor', element: <DoctorProfile /> }
       ]
     },
     {

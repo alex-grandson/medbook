@@ -34,14 +34,6 @@ export default function Page404() {
               Упс! Что-то пошло не так. Не можем найти такую страницу
             </Typography>
 
-            <motion.div variants={varBounceIn}>
-              <Box
-                component="img"
-                src="/static/illustrations/illustration_404.svg"
-                sx={{ height: 260, mx: 'auto', my: { xs: 5, sm: 10 } }}
-              />
-            </motion.div>
-
             <Button to="/" size="large" variant="contained" component={RouterLink}>
               На главную
             </Button>

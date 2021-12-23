@@ -22,8 +22,23 @@ const sidebarConfig = [
     icon: getIcon(peopleFill)
   },
   {
-    title: 'Запись к врачу',
-    path: '/dashboard/products',
+    title: 'Профиль',
+    path: '/dashboard/profile',
+    icon: getIcon(shoppingBagFill)
+  },
+  {
+    title: 'Профиль врача',
+    path: '/dashboard/doctor',
+    icon: getIcon(shoppingBagFill)
+  },
+  {
+    title: 'Мои визиты',
+    path: '/dashboard/appointments',
+    icon: getIcon(shoppingBagFill)
+  },
+  {
+    title: 'Записаться',
+    path: '/dashboard/appointment',
     icon: getIcon(shoppingBagFill)
   },
   {

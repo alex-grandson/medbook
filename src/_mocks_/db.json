@@ -1,0 +1,111 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "login": "zemly@mail.ru",
+      "firstName": "Петр Валерьевич",
+      "lastName": "Землянский",
+      "age": 34,
+      "birthDate": "10.10.1984"
+    }
+  ],
+  "doctorHistory": [],
+  "doctor": [
+    {
+      "id": 1,
+      "login": "best_doc@bk.ru",
+      "firstName": "Нурфат Расулович",
+      "lastName": "Кайратов",
+      "specialization": "Нейрофизиология",
+      "urlPhoto": null,
+      "startWorkDay": "10:30:00",
+      "endWorkDay": "18:30:00",
+      "birthDate": "12.12.1988",
+      "bodyPart": "brain"
+    },
+    {
+      "id": 2,
+      "login": "vvvertex@ya.ru",
+      "firstName": "Фахри Ипполионович",
+      "lastName": "Гарбузов",
+      "specialization": "Кардиохирургия",
+      "urlPhoto": null,
+      "startWorkDay": "10:30:00",
+      "endWorkDay": "18:30:00",
+      "birthDate": "12.12.1988",
+      "bodyPart": "heart"
+    }
+  ],
+  "timetable": [
+    {
+      "doctorId": 2,
+      "date": "23.12.2021",
+      "slots": [1, 2, 3, 4, 5, 6, 15, 16]
+    }
+  ],
+  "appointment": [
+    {
+      "id": 1,
+      "meetTime": "10:30",
+      "meetDate": "22.12.2021",
+      "doctorLogin": "best_doc@bk.ru",
+      "doctorName": "Нурфат Расулович Кайратов",
+      "doctorSpec": "Офтальмология",
+      "doctorRoom": 398
+    },
+    {
+      "id": 2,
+      "meetTime": "10:30",
+      "meetDate": "23.12.2021",
+      "doctorLogin": "best_doc@bk.ru",
+      "doctorName": "Нурфат Расулович Кайратов",
+      "doctorSpec": "Офтальмология",
+      "doctorRoom": 442
+    },
+    {
+      "id": 3,
+      "meetTime": "15:30",
+      "meetDate": "25.12.2021",
+      "doctorLogin": "best_doc@bk.ru",
+      "doctorName": "Гарбузов Фахри Ипполионович",
+      "doctorSpec": "Нейрофизиология",
+      "doctorRoom": 658
+    },
+    {
+      "id": 4,
+      "meetTime": "10:30",
+      "meetDate": "26.12.2021",
+      "doctorLogin": "best_doc@bk.ru",
+      "doctorName": "Попов Евгений Харитонович",
+      "doctorSpec": "Зубная хирургия",
+      "doctorRoom": 456
+    },
+    {
+      "id": 5,
+      "meetTime": "18:00",
+      "meetDate": "26.12.2021",
+      "doctorLogin": "best_doc@bk.ru",
+      "doctorName": "Попов Евгений Харитонович",
+      "doctorSpec": "Зубная хирургия",
+      "doctorRoom": 255
+    },
+    {
+      "id": 6,
+      "meetTime": "16:00",
+      "meetDate": "29.12.2021",
+      "doctorLogin": "best_doc@bk.ru",
+      "doctorName": "Нурфат Расулович Кайратов",
+      "doctorSpec": "Офтальмология",
+      "doctorRoom": 134
+    },
+    {
+      "id": 7,
+      "meetTime": "12:30",
+      "meetDate": "30.12.2021",
+      "doctorLogin": "best_doc@bk.ru",
+      "doctorName": "Гейзинберг Иоганн Асалович",
+      "doctorSpec": "Остиопатия",
+      "doctorRoom": 357
+    }
+  ]
+}

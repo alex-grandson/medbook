@@ -17,12 +17,15 @@ export default function RegisterForm() {
 
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string()
-      .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
-      .required('First name required'),
-    lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Last name required'),
-    email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-    password: Yup.string().required('Password is required')
+      .min(2, 'Слишком коротко!')
+      .max(50, 'Очень длинно!')
+      .required('Имя: Обязательное поле'),
+    lastName: Yup.string()
+      .min(2, 'Слишком коротко!')
+      .max(50, 'Слишком длинно!')
+      .required('Фамилия: Обязательное поле'),
+    email: Yup.string().email('Проверьте корректность почты').required('Почта: Обязательное поле'),
+    password: Yup.string().required('Пароль: Обязательное поле')
   });
 
   const formik = useFormik({
