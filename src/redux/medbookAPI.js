@@ -9,8 +9,15 @@ export const medbookAPI = createApi({
     }),
     getUsers: build.query({
       query: (login = '') => `user?_limit=1&${login && `login=${login}`}`
+    }),
+    login: build.mutation({
+      query: (body = {}) => ({ url: '/login', method: 'POST', body })
+    }),
+    registration: build.mutation({
+      query: (body = {}) => ({ url: '/user', method: 'POST', body })
     })
   })
 });
 
-export const { useGetDoctorsQuery, useGetUsersQuery } = medbookAPI;
+export const { useGetDoctorsQuery, useGetUsersQuery, useRegistrationMutation, useLoginMutation } =
+  medbookAPI;

@@ -5,6 +5,7 @@ import { useFormik, Form, FormikProvider } from 'formik';
 import { Icon } from '@iconify/react';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
+
 // material
 import {
   Link,
@@ -16,7 +17,8 @@ import {
   FormControlLabel
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-
+import { useLoginMutation } from '../../../redux/medbookAPI';
+import Auth from '../../../auth';
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
@@ -28,6 +30,19 @@ export default function LoginForm() {
     password: Yup.string().required('Password is required')
   });
 
+  const [login] = useLoginMutation();
+
+  const handleLogin = async () => {
+    if (!formik || !formik.isValid) return null;
+    try {
+      await login(formik.values).unwrap();
+      Auth.login(() => null, 'patient');
+      navigate('/dashboard', { replace: true });
+    } catch (e) {
+      console.error('Не удалось войти в систему ', e);
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -35,9 +50,7 @@ export default function LoginForm() {
       remember: true
     },
     validationSchema: LoginSchema,
-    onSubmit: () => {
-      navigate('/dashboard', { replace: true });
-    }
+    onSubmit: handleLogin
   });
 
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
