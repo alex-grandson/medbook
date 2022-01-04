@@ -6,7 +6,17 @@
       "firstName": "Петр Валерьевич",
       "lastName": "Землянский",
       "age": 34,
-      "birthDate": "10.10.1984"
+      "birthDate": "10.10.1984",
+      "role": "patient"
+    },
+    {
+      "id": 2,
+      "login": "best_doc@bk.ru",
+      "firstName": "Нурфат Расулович",
+      "lastName": "Кайратов",
+      "age": 30,
+      "birthDate": "12.12.1988",
+      "role": "doctor"
     }
   ],
   "doctorHistory": [],
