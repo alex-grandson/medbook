@@ -17,7 +17,6 @@ import Auth from '../../../auth';
 export default function RegisterForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [dateFieldIsClicked, setDateFieldIsClicked] = useState(false);
 
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -30,7 +29,7 @@ export default function RegisterForm() {
       .required('Фамилия: Обязательное поле'),
     email: Yup.string().email('Проверьте корректность почты').required('Почта: Обязательное поле'),
     password: Yup.string().required('Пароль: Обязательное поле'),
-    birthDate: Yup.date()
+      : Yup.date()
       .min(new Date('01.01.1900'), 'Введите корректную дату!')
       .max(new Date(), 'Введите корректную дату')
       .required('Дата рождения: Обязательное поле')
