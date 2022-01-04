@@ -29,7 +29,7 @@ export default function RegisterForm() {
       .required('Фамилия: Обязательное поле'),
     email: Yup.string().email('Проверьте корректность почты').required('Почта: Обязательное поле'),
     password: Yup.string().required('Пароль: Обязательное поле'),
-      : Yup.date()
+    birthDate: Yup.date()
       .min(new Date('01.01.1900'), 'Введите корректную дату!')
       .max(new Date(), 'Введите корректную дату')
       .required('Дата рождения: Обязательное поле')
