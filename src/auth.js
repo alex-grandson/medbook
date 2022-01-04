@@ -10,6 +10,15 @@ class Auth {
     cb();
   }
 
+  setRole(role) {
+    if (role === 'doctor') this.role = role;
+    else this.role = 'patient';
+  }
+
+  getRole() {
+    return this.role;
+  }
+
   logout(cb) {
     this.auth = false;
     this.role = undefined;
@@ -18,6 +27,10 @@ class Auth {
 
   isAuthenticated() {
     return this.authenticated;
+  }
+
+  isDoctor() {
+    return this.role === 'doctor';
   }
 }
 
