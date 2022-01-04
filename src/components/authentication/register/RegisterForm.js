@@ -6,8 +6,15 @@ import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 import { useNavigate } from 'react-router-dom';
 // material
-import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
-import { DatePicker, LoadingButton } from '@mui/lab';
+import {
+  Stack,
+  TextField,
+  IconButton,
+  InputAdornment,
+  FormControlLabel,
+  Checkbox
+} from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 
 import { useRegistrationMutation } from '../../../redux/medbookAPI';
 import Auth from '../../../auth';
@@ -54,13 +61,13 @@ export default function RegisterForm() {
       lastName: '',
       email: '',
       password: '',
-      birthDate: ''
+      isDoctor: false
     },
     validationSchema: RegisterSchema,
     onSubmit: handleRegister
   });
 
-  const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
+  const { errors, touched, handleSubmit, isSubmitting, getFieldProps, handleChange } = formik;
 
   return (
     <FormikProvider value={formik}>
@@ -122,6 +129,13 @@ export default function RegisterForm() {
             error={Boolean(touched.birthDate && errors.birthDate)}
             helperText={touched.birthDate && errors.birthDate}
           />
+
+          <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
+            <FormControlLabel
+              control={<Checkbox {...getFieldProps('idDoctor')} />}
+              label="Я врач"
+            />
+          </Stack>
 
           <LoadingButton
             fullWidth
