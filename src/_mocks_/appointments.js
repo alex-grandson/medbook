@@ -5,8 +5,17 @@ export const APPOINTMENTS = [
     meetDate: '22.12.2021',
     doctorLogin: 'best_doc@bk.ru',
     doctorName: 'Нурфат Расулович Кайратов',
-    doctorSpec: 'Офтальмология',
-    doctorRoom: 398
+    doctorSpec: 'Офтальмолог',
+    doctorRoom: 398,
+    complaints: '',
+    objectively: 'Состояние удовлетворительное',
+    temp: '36.6',
+    pulse: '68’',
+    blood_pressure: '110/70 мм рт.ст.',
+    diagnosis: 'ОРВИ',
+    application:
+      'Кожные покровы и видимые слизистые без изменений, носовое дыхание свободное. Язык влажный, чистый. В легких везикулярное дыхание, хрипоты нет. Тоны сердца ритмичные, живой без болезненный',
+    receipt: 'полоскание, мытье.'
   },
   {
     id: 2,
@@ -14,8 +23,12 @@ export const APPOINTMENTS = [
     meetDate: '23.12.2021',
     doctorLogin: 'best_doc@bk.ru',
     doctorName: 'Нурфат Расулович Кайратов',
-    doctorSpec: 'Офтальмология',
-    doctorRoom: 442
+    doctorSpec: 'Офтальмолог',
+    doctorRoom: 442,
+    complaints: '',
+    objectively: 'Состояние удовлетворительное',
+    temp: '36.7',
+    receipt: 'Ну тут у нас значит среднее бобо. Надо лечить'
   },
   {
     id: 3,
@@ -23,8 +36,9 @@ export const APPOINTMENTS = [
     meetDate: '25.12.2021',
     doctorLogin: 'vvvertex@ya.ru',
     doctorName: 'Гарбузов Фахри Ипполионович',
-    doctorSpec: 'Нейрофизиология',
-    doctorRoom: 658
+    doctorSpec: 'Нейрофизиолог',
+    doctorRoom: 658,
+    receipt: 'Ну тут у нас значит среднее бобо. Надо лечить'
   },
   {
     id: 4,
@@ -32,8 +46,9 @@ export const APPOINTMENTS = [
     meetDate: '26.12.2021',
     doctorLogin: 'best_doc@bk.ru',
     doctorName: 'Попов Евгений Харитонович',
-    doctorSpec: 'Зубная хирургия',
-    doctorRoom: 456
+    doctorSpec: 'Зубной хирург',
+    doctorRoom: 456,
+    receipt: 'Ну тут у нас значит среднее бобо. Надо лечить'
   },
   {
     id: 5,
@@ -41,8 +56,11 @@ export const APPOINTMENTS = [
     meetDate: '26.12.2021',
     doctorLogin: 'best_doc@bk.ru',
     doctorName: 'Попов Евгений Харитонович',
-    doctorSpec: 'Зубная хирургия',
-    doctorRoom: 255
+    doctorSpec: 'Зубной хирург',
+    doctorRoom: 255,
+    info: {
+      receipt: 'Ну тут у нас значит среднее бобо. Надо лечить'
+    }
   },
   {
     id: 6,
@@ -50,8 +68,11 @@ export const APPOINTMENTS = [
     meetDate: '29.12.2021',
     doctorLogin: 'best_doc@bk.ru',
     doctorName: 'Нурфат Расулович Кайратов',
-    doctorSpec: 'Офтальмология',
-    doctorRoom: 134
+    doctorSpec: 'Офтальмолог',
+    doctorRoom: 134,
+    info: {
+      receipt: 'Ну тут у нас значит среднее бобо. Надо лечить'
+    }
   },
   {
     id: 7,
@@ -59,7 +80,8 @@ export const APPOINTMENTS = [
     meetDate: '30.12.2021',
     doctorLogin: 'best_doc@bk.ru',
     doctorName: 'Гейзинберг Иоганн Асалович',
-    doctorSpec: 'Остиопатия',
-    doctorRoom: 357
+    doctorSpec: 'Остеопат',
+    doctorRoom: 357,
+    receipt: 'Ну тут у нас значит среднее бобо. Надо лечить'
   }
 ];
