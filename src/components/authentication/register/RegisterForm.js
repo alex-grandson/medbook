@@ -7,7 +7,10 @@ import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 import { useNavigate } from 'react-router-dom';
 // material
 import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
+import { DatePicker, LoadingButton } from '@mui/lab';
+
+import { useRegistrationMutation } from '../../../redux/medbookAPI';
+import Auth from '../../../auth';
 
 // ----------------------------------------------------------------------
 
@@ -25,20 +28,36 @@ export default function RegisterForm() {
       .max(50, 'Слишком длинно!')
       .required('Фамилия: Обязательное поле'),
     email: Yup.string().email('Проверьте корректность почты').required('Почта: Обязательное поле'),
-    password: Yup.string().required('Пароль: Обязательное поле')
+    password: Yup.string().required('Пароль: Обязательное поле'),
+    birthDate: Yup.date()
+      .min(new Date('01.01.1900'), 'Введите корректную дату!')
+      .max(new Date(), 'Введите корректную дату')
+      .required('Дата рождения: Обязательное поле')
   });
+
+  const [register] = useRegistrationMutation();
+
+  const handleRegister = async () => {
+    if (!formik || !formik.isValid) return null;
+    try {
+      await register(formik.values).unwrap();
+      Auth.login(() => null, 'patient');
+      navigate('/dashboard', { replace: true });
+    } catch (e) {
+      console.error('Не удалось создать пользователя ', e);
+    }
+  };
 
   const formik = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
       email: '',
-      password: ''
+      password: '',
+      birthDate: ''
     },
     validationSchema: RegisterSchema,
-    onSubmit: () => {
-      navigate('/dashboard', { replace: true });
-    }
+    onSubmit: handleRegister
   });
 
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
@@ -92,6 +111,16 @@ export default function RegisterForm() {
             }}
             error={Boolean(touched.password && errors.password)}
             helperText={touched.password && errors.password}
+          />
+
+          <TextField
+            fullWidth
+            autoComplete="birth-date"
+            type="date"
+            label="Дата рождения"
+            {...getFieldProps('birthDate')}
+            error={Boolean(touched.birthDate && errors.birthDate)}
+            helperText={touched.birthDate && errors.birthDate}
           />
 
           <LoadingButton
