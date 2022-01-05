@@ -5,7 +5,7 @@ class Auth {
   }
 
   login(cb, role) {
-    this.auth = true;
+    this.authenticated = true;
     this.role = role;
     cb();
   }
@@ -20,7 +20,7 @@ class Auth {
   }
 
   logout(cb) {
-    this.auth = false;
+    this.authenticated = false;
     this.role = undefined;
     cb();
   }

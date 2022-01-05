@@ -15,9 +15,17 @@ export const medbookAPI = createApi({
     }),
     registration: build.mutation({
       query: (body = {}) => ({ url: '/user', method: 'POST', body })
+    }),
+    makeAppointment: build.mutation({
+      query: (body = {}) => ({ url: '/appointment', method: 'POST', body })
     })
   })
 });
 
-export const { useGetDoctorsQuery, useGetUsersQuery, useRegistrationMutation, useLoginMutation } =
-  medbookAPI;
+export const {
+  useGetDoctorsQuery,
+  useGetUsersQuery,
+  useRegistrationMutation,
+  useLoginMutation,
+  useMakeAppointmentMutation
+} = medbookAPI;

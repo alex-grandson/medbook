@@ -24,7 +24,8 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { DatePicker, DateTimePicker, LoadingButton } from '@mui/lab';
 import { Form, FormikProvider, useFormik } from 'formik';
-import { useGetDoctorsQuery } from '../redux/medbookAPI';
+import * as Yup from 'yup';
+import { useGetDoctorsQuery, useMakeAppointmentMutation } from '../redux/medbookAPI';
 import BodyPart from '../components/BodyPart';
 
 const ORGANS_DEFAULT = {
@@ -49,9 +50,13 @@ export default function MakeAppointment() {
   const [organs, setOrgans] = useState({ ...ORGANS_DEFAULT });
   const [selectedOrgan, setSelectedOrgan] = useState('');
   const { data = [], isLoading } = useGetDoctorsQuery(selectedOrgan);
-  const { selectedDoctor, setSelectedDoctor } = useState(null);
-  const { selectedDate, setSelectedDate } = useState(new Date('2021-21-23T12:00:00'));
-  const { comment, setComment } = useState('');
+
+  const MakeAppointmentSchema = Yup.object().shape({
+    comment: Yup.string(),
+    selectedDoctor: Yup.object().required('Выберите одного из доступных врачей'),
+    selectedDate: Yup.string()
+  });
+
   const onBodyPartClick = (e, bodyPart) => {
     setSelectedOrgan(bodyPart);
     const falsyObj = Object.keys(ORGANS_DEFAULT).reduce(
@@ -67,23 +72,32 @@ export default function MakeAppointment() {
     });
   };
 
+  const [makeAppointment] = useMakeAppointmentMutation();
+
+  const handleMakeAppointment = async () => {
+    if (!formik || !formik.isValid) return null;
+    try {
+      await makeAppointment(formik.values);
+    } catch (e) {
+      console.error('Не удалось записаться на прием ', e);
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
       comment: '',
       selectedDoctor: undefined,
-      selectedDate: undefined
+      selectedDate: new Date()
     },
-    onSubmit: () => {
-      console.log(JSON.stringify(data));
-    }
+    validationSchema: MakeAppointmentSchema,
+    onSubmit: handleMakeAppointment
   });
-  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
 
-  const handleChangeDoctor = (event) => {
-    setSelectedDoctor(event.target.value);
-  };
+  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps, setFieldValue } =
+    formik;
 
   if (isLoading) return <p>Loading...</p>;
+
   return (
     <Container>
       <Grid container spacing={2} justifyContent="space-around">
@@ -103,23 +117,32 @@ export default function MakeAppointment() {
                 {...getFieldProps('comment')}
                 type="text"
                 label="Комментарий для врача"
+                error={Boolean(touched.comment && errors.comment)}
+                helperText={touched.comment && errors.comment}
               />
 
-              <Select value={selectedDoctor} onChange={handleChangeDoctor} placeholder="Врач">
+              <Select
+                disabled={!selectedOrgan || !data.length}
+                placeholder="Врач"
+                {...getFieldProps('selectedDoctor')}
+                error={Boolean(touched.selectedDoctor && errors.selectedDoctor)}
+                helperText={touched.selectedDoctor && errors.selectedDoctor}
+              >
                 {data.map((item) => (
-                  <MenuItem key={item.id} value={item.id}>
+                  <MenuItem key={item.id} value={item}>
                     {item.lastName} {item.firstName} ({item.specialization})
                   </MenuItem>
                 ))}
               </Select>
+
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DateTimePicker
                   renderInput={(props) => <TextField {...props} />}
                   label="Время приема"
-                  value={selectedDate}
-                  onChange={(newValue) => {
-                    setSelectedDate(newValue);
-                  }}
+                  value={formik.values.selectedDate}
+                  onChange={(newValue) => setFieldValue('selectedDate', newValue)}
+                  error={Boolean(touched.selectedDate && errors.selectedDate)}
+                  helperText={touched.selectedDate && errors.selectedDate}
                 />
               </LocalizationProvider>
             </Stack>
@@ -131,7 +154,13 @@ export default function MakeAppointment() {
               sx={{ my: 2 }}
             />
 
-            <LoadingButton fullWidth size="large" type="submit" variant="contained">
+            <LoadingButton
+              fullWidth
+              size="large"
+              type="submit"
+              variant="contained"
+              loading={isSubmitting}
+            >
               Записаться на прием
             </LoadingButton>
           </Form>
