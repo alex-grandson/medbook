@@ -5,6 +5,7 @@ import { useFormik, Form, FormikProvider } from 'formik';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 import { useNavigate } from 'react-router-dom';
+import { format } from 'date-fns';
 // material
 import {
   Stack,
@@ -61,6 +62,7 @@ export default function RegisterForm() {
       lastName: '',
       email: '',
       password: '',
+      birthDate: format(new Date(), 'yyyy-MM-dd'),
       isDoctor: false
     },
     validationSchema: RegisterSchema,
