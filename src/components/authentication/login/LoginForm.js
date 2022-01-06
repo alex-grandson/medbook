@@ -35,8 +35,8 @@ export default function LoginForm() {
   const handleLogin = async () => {
     if (!formik || !formik.isValid) return null;
     try {
-      const { role } = await login(formik.values).unwrap();
-      Auth.login(() => null, role);
+      const userInfo = await login(formik.values).unwrap();
+      Auth.login(() => null, userInfo);
       navigate('/dashboard', { replace: true });
     } catch (e) {
       console.error('Не удалось войти в систему ', e);

@@ -4,11 +4,19 @@ class Auth {
   constructor() {
     this.authenticated = false;
     this.role = undefined;
+    this.userInfo = undefined;
   }
 
-  login(cb, role) {
-    this.authenticated = true;
+  setProperties(authenticated, role, userInfo) {
+    this.authenticated = authenticated;
     this.role = role;
+    this.userInfo = userInfo;
+  }
+
+  login(cb, info) {
+    this.authenticated = true;
+    this.role = info.role;
+    this.userInfo = info;
     cb();
   }
 
@@ -33,6 +41,10 @@ class Auth {
 
   isDoctor() {
     return this.role === ROLES.DOCTOR;
+  }
+
+  getUserInfo() {
+    return this.userInfo;
   }
 }
 

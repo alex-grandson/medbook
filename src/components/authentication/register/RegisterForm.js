@@ -50,8 +50,11 @@ export default function RegisterForm() {
     if (!formik || !formik.isValid) return null;
     try {
       await register(formik.values).unwrap();
-      console.log(formik);
-      Auth.login(() => null, formik.values.isDoctor ? ROLES.DOCTOR : ROLES.PATIENT);
+      const userInfo = {
+        ...formik.values,
+        role: formik.values.isDoctor ? ROLES.DOCTOR : ROLES.PATIENT
+      };
+      Auth.login(() => null, userInfo);
       navigate('/dashboard', { replace: true });
     } catch (e) {
       console.error('Не удалось создать пользователя ', e);
