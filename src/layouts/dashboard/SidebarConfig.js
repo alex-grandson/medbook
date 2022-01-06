@@ -5,6 +5,7 @@ import shoppingBagFill from '@iconify/icons-eva/shopping-bag-fill';
 import lockFill from '@iconify/icons-eva/lock-fill';
 import personAddFill from '@iconify/icons-eva/person-add-fill';
 import alertTriangleFill from '@iconify/icons-eva/alert-triangle-fill';
+import { ROLES } from '../../constants';
 
 // ----------------------------------------------------------------------
 
@@ -14,47 +15,56 @@ const sidebarConfig = [
   {
     title: 'Главная',
     path: '/dashboard/app',
-    icon: getIcon(pieChart2Fill)
+    icon: getIcon(pieChart2Fill),
+    visibleForRoles: [ROLES.DOCTOR, ROLES.PATIENT]
   },
   {
-    title: 'пациенты',
+    title: 'Пациенты',
     path: '/dashboard/user',
-    icon: getIcon(peopleFill)
+    icon: getIcon(peopleFill),
+    visibleForRoles: [ROLES.DOCTOR]
   },
   {
     title: 'Профиль',
     path: '/dashboard/profile',
-    icon: getIcon(shoppingBagFill)
+    icon: getIcon(shoppingBagFill),
+    visibleForRoles: [ROLES.DOCTOR, ROLES.PATIENT]
   },
   {
     title: 'Профиль врача',
     path: '/dashboard/doctor',
-    icon: getIcon(shoppingBagFill)
+    icon: getIcon(shoppingBagFill),
+    visibleForRoles: [ROLES.DOCTOR]
   },
   {
     title: 'Мои визиты',
     path: '/dashboard/appointments',
-    icon: getIcon(shoppingBagFill)
+    icon: getIcon(shoppingBagFill),
+    visibleForRoles: [ROLES.PATIENT]
   },
   {
     title: 'Записаться',
     path: '/dashboard/appointment',
-    icon: getIcon(shoppingBagFill)
+    icon: getIcon(shoppingBagFill),
+    visibleForRoles: [ROLES.PATIENT]
   },
   {
-    title: 'login',
+    title: 'Вход',
     path: '/login',
-    icon: getIcon(lockFill)
+    icon: getIcon(lockFill),
+    visibleForRoles: [ROLES.DOCTOR, ROLES.PATIENT]
   },
   {
-    title: 'register',
+    title: 'Регистрация',
     path: '/register',
-    icon: getIcon(personAddFill)
+    icon: getIcon(personAddFill),
+    visibleForRoles: [ROLES.DOCTOR, ROLES.PATIENT]
   },
   {
     title: 'Not found',
     path: '/404',
-    icon: getIcon(alertTriangleFill)
+    icon: getIcon(alertTriangleFill),
+    visibleForRoles: [ROLES.DOCTOR, ROLES.PATIENT]
   }
 ];
 

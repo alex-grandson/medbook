@@ -1,3 +1,5 @@
+import { ROLES } from './constants';
+
 class Auth {
   constructor() {
     this.authenticated = false;
@@ -11,8 +13,8 @@ class Auth {
   }
 
   setRole(role) {
-    if (role === 'doctor') this.role = role;
-    else this.role = 'patient';
+    if (role === ROLES.DOCTOR) this.role = role;
+    else this.role = ROLES.PATIENT;
   }
 
   getRole() {
@@ -30,7 +32,7 @@ class Auth {
   }
 
   isDoctor() {
-    return this.role === 'doctor';
+    return this.role === ROLES.DOCTOR;
   }
 }
 

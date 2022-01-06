@@ -19,6 +19,7 @@ import { LoadingButton } from '@mui/lab';
 
 import { useRegistrationMutation } from '../../../redux/medbookAPI';
 import Auth from '../../../auth';
+import { ROLES } from '../../../constants';
 
 // ----------------------------------------------------------------------
 
@@ -49,7 +50,8 @@ export default function RegisterForm() {
     if (!formik || !formik.isValid) return null;
     try {
       await register(formik.values).unwrap();
-      Auth.login(() => null, 'patient');
+      console.log(formik);
+      Auth.login(() => null, formik.values.isDoctor ? ROLES.DOCTOR : ROLES.PATIENT);
       navigate('/dashboard', { replace: true });
     } catch (e) {
       console.error('Не удалось создать пользователя ', e);
@@ -69,7 +71,7 @@ export default function RegisterForm() {
     onSubmit: handleRegister
   });
 
-  const { errors, touched, handleSubmit, isSubmitting, getFieldProps, handleChange } = formik;
+  const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
 
   return (
     <FormikProvider value={formik}>
@@ -134,7 +136,7 @@ export default function RegisterForm() {
 
           <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
             <FormControlLabel
-              control={<Checkbox {...getFieldProps('idDoctor')} />}
+              control={<Checkbox {...getFieldProps('isDoctor')} />}
               label="Я врач"
             />
           </Stack>
