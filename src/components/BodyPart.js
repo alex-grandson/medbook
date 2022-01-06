@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 export default function BodyPart({ imageName, onClick, isChecked, key }) {
   return (
@@ -11,7 +11,7 @@ export default function BodyPart({ imageName, onClick, isChecked, key }) {
         }
       >
         <img src={`/assets/body_parts/${imageName}.png`} alt={imageName} height={90} />
-        <p>{imageName}</p>
+        <Typography variant="body1">{imageName}</Typography>
       </Box>
     </>
   );
@@ -23,10 +23,12 @@ const styles = {
     padding: '15px'
   },
   unchecked: {
+    cursor: 'pointer',
     opacity: 0.5,
     padding: '15px'
   },
   default: {
+    cursor: 'pointer',
     padding: '15px'
   }
 };
