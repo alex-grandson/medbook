@@ -24,12 +24,12 @@ const sidebarConfig = [
     icon: getIcon(Calendar),
     visibleForRoles: [ROLES.DOCTOR]
   },
-  {
-    title: 'Пациенты',
-    path: '/dashboard/user',
-    icon: getIcon(peopleFill),
-    visibleForRoles: [ROLES.DOCTOR]
-  },
+  // {
+  //   title: 'Пациенты',
+  //   path: '/dashboard/user',
+  //   icon: getIcon(peopleFill),
+  //   visibleForRoles: [ROLES.DOCTOR]
+  // },
   {
     title: 'Профиль',
     path: '/dashboard/profile',
