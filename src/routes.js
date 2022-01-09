@@ -14,6 +14,7 @@ import DoctorProfile from './pages/DoctorProfile';
 import Appointments from './pages/Appointments';
 import MakeAppointment from './pages/MakeAppointment';
 import { ROLES } from './constants';
+import DoctorSchedule from './pages/DoctorSchedule';
 
 // ----------------------------------------------------------------------
 
@@ -28,7 +29,14 @@ export default function Router() {
       children: [
         { element: <Navigate to="/dashboard/profile" replace /> },
         { path: 'user', element: <User /> },
-        { path: 'app', element: <DashboardApp /> },
+        {
+          path: 'app',
+          element: <DashboardApp />
+        },
+        {
+          path: 'schedule',
+          element: !isDoctor ? <DoctorSchedule /> : <Navigate to="/dashboard" />
+        },
         { path: 'appointments', element: <Appointments /> },
         { path: 'appointment', element: <MakeAppointment /> },
         { path: 'profile', element: !isDoctor ? <Profile /> : <Navigate to="/dashboard" /> },
