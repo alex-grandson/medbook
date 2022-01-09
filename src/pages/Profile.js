@@ -3,7 +3,8 @@ import { Typography, Container, Stack, Button, Card } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Edit as EditIcon } from '@mui/icons-material';
 import Page from '../components/Page';
-import EditPatientDialog from '../components/EditPatientDialog';
+
+import EditUserDialog from '../components/EditUserDialog';
 
 export default function Profile() {
   const userData = useSelector((state) => state.auth.userInfo);
@@ -13,7 +14,7 @@ export default function Profile() {
   return (
     <Page title="Профиль | Medbook">
       {showModal && (
-        <EditPatientDialog onClose={() => setShowModal(false)} onShow={() => setShowModal(true)} />
+        <EditUserDialog onClose={() => setShowModal(false)} onShow={() => setShowModal(true)} />
       )}
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>

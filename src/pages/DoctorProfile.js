@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Typography, Container, Stack, Button, Card } from '@mui/material';
-import axios from 'axios';
+import { Edit as EditIcon } from '@mui/icons-material';
+
 import Page from '../components/Page';
 
-import { DOCTORS } from '../_mocks_/doctor';
-
-import { useGetDoctorsQuery } from '../redux/medbookAPI';
+import EditUserDialog from '../components/EditUserDialog';
 
 export default function DoctorProfile() {
-  const [user, setUser] = useState(DOCTORS[0]);
-  const { data = [], isLoading } = useGetDoctorsQuery();
+  const userData = useSelector((state) => state.auth.userInfo);
 
-  if (isLoading) return <h1>Loading...</h1>;
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <Page title="Профиль | Medbook">
+      {showModal && (
+        <EditUserDialog onClose={() => setShowModal(false)} onShow={() => setShowModal(true)} />
+      )}
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
@@ -23,20 +25,29 @@ export default function DoctorProfile() {
         </Stack>
         <Card style={{ padding: 15 }}>
           <Typography variant="h5" gutterBottom>
-            {user.lastName} {user.firstName}
+            {userData?.lastName} {userData?.firstName}
           </Typography>
           <Typography variant="body1">Электронная почта:</Typography>
           <Typography variant="subtitle1" sx={{ mb: 1 }}>
-            {user.login}
+            {userData?.login}
           </Typography>
           <Typography variant="body1">Дата рождения:</Typography>
           <Typography variant="subtitle1" sx={{ mb: 1 }}>
-            {user.birthDate}
+            {userData?.birthDate}
           </Typography>
           <Typography variant="body1">Специализация:</Typography>
           <Typography variant="subtitle1" sx={{ mb: 1 }}>
-            {user.specialization}
+            {userData?.specialization}
           </Typography>
+          <Button
+            sx={{ marginTop: '8px' }}
+            aria-label="delete"
+            variant="contained"
+            startIcon={<EditIcon />}
+            onClick={() => setShowModal(true)}
+          >
+            Изменить информацию
+          </Button>
         </Card>
       </Container>
     </Page>

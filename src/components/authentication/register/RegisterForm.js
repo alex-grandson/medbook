@@ -14,19 +14,25 @@ import {
   IconButton,
   InputAdornment,
   FormControlLabel,
-  Checkbox
+  Checkbox,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 import { useRegistrationMutation } from '../../../redux/medbookAPI';
 import { login as loginAction } from '../../../redux/authSlice';
-import { ROLES } from '../../../constants';
+import { ROLES, ORGAN_NAMES } from '../../../constants';
 
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+
+  const [showSpecialization, setShowSpecialization] = useState(false);
 
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -42,7 +48,8 @@ export default function RegisterForm() {
     birthDate: Yup.date()
       .min(new Date('01.01.1900'), 'Введите корректную дату!')
       .max(new Date(), 'Введите корректную дату')
-      .required('Дата рождения: Обязательное поле')
+      .required('Дата рождения: Обязательное поле'),
+    specialization: Yup.string()
   });
 
   const [register] = useRegistrationMutation();
@@ -71,7 +78,8 @@ export default function RegisterForm() {
       email: '',
       password: '',
       birthDate: format(new Date(), 'yyyy-MM-dd'),
-      isDoctor: false
+      isDoctor: false,
+      specialization: undefined
     },
     validationSchema: RegisterSchema,
     onSubmit: handleRegister
@@ -142,10 +150,29 @@ export default function RegisterForm() {
 
           <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
             <FormControlLabel
+              onClick={() => setShowSpecialization(!showSpecialization)}
               control={<Checkbox {...getFieldProps('isDoctor')} />}
               label="Я врач"
             />
           </Stack>
+
+          {showSpecialization && (
+            <FormControl>
+              <InputLabel id="test-select-label">Специализация</InputLabel>
+              <Select
+                {...getFieldProps('specialization')}
+                label="Специализация"
+                error={Boolean(touched.selectedDoctor && errors.selectedDoctor)}
+                helperText={touched.selectedDoctor && errors.selectedDoctor}
+              >
+                {ORGAN_NAMES.map((organName) => (
+                  <MenuItem key={organName} value={organName}>
+                    {organName}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
 
           <LoadingButton
             fullWidth

@@ -1,4 +1,14 @@
 {
+  "login": [
+    {
+      "id": 1
+    }
+  ],
+  "editUser": [
+    {
+      "id": 1
+    }
+  ],
   "user": [
     {
       "id": 1,
@@ -103,16 +113,8 @@
     },
     {
       "doctorId": 2,
-      "date": "2022-01-14",
-      "slots": [
-        {
-          "timeSlot": 2,
-          "patientId": 10,
-          "firstName": "брат",
-          "lastName": "Джума намаз",
-          "message": "Не пропусти"
-        }
-      ]
+      "date": "23.12.2021",
+      "slots": [1, 2, 3, 4, 5, 6, 15, 16]
     }
   ],
   "appointment": [
