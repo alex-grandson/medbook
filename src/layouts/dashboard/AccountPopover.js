@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useRef, useState } from 'react';
 import homeFill from '@iconify/icons-eva/home-fill';
 import personFill from '@iconify/icons-eva/person-fill';
@@ -8,7 +9,7 @@ import { alpha } from '@mui/material/styles';
 import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from '@mui/material';
 // components
 import MenuPopover from '../../components/MenuPopover';
-import Auth from '../../auth';
+import { logout as logoutAction } from '../../redux/authSlice';
 
 // ----------------------------------------------------------------------
 
@@ -38,12 +39,14 @@ export default function AccountPopover() {
     setOpen(false);
   };
 
-  const account = Auth.getUserInfo();
+  const account = useSelector((state) => state.auth.userInfo);
 
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+
   const handleClick = () => {
-    Auth.logout(() => localStorage.removeItem('userInfo'));
+    dispatch(logoutAction());
     navigate('/login', { replace: true });
   };
 

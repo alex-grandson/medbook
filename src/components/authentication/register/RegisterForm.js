@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Icon } from '@iconify/react';
 import { useFormik, Form, FormikProvider } from 'formik';
 import eyeFill from '@iconify/icons-eva/eye-fill';
@@ -18,7 +19,7 @@ import {
 import { LoadingButton } from '@mui/lab';
 
 import { useRegistrationMutation } from '../../../redux/medbookAPI';
-import Auth from '../../../auth';
+import { login as loginAction } from '../../../redux/authSlice';
 import { ROLES } from '../../../constants';
 
 // ----------------------------------------------------------------------
@@ -46,6 +47,8 @@ export default function RegisterForm() {
 
   const [register] = useRegistrationMutation();
 
+  const dispatch = useDispatch();
+
   const handleRegister = async () => {
     if (!formik || !formik.isValid) return null;
     try {
@@ -54,7 +57,7 @@ export default function RegisterForm() {
         ...formik.values,
         role: formik.values.isDoctor ? ROLES.DOCTOR : ROLES.PATIENT
       };
-      Auth.login(() => localStorage.setItem('userInfo', JSON.stringify(userInfo)), userInfo);
+      dispatch(loginAction({ info: userInfo }));
       navigate('/dashboard', { replace: true });
     } catch (e) {
       console.error('Не удалось создать пользователя ', e);

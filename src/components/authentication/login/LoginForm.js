@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useFormik, Form, FormikProvider } from 'formik';
 import { Icon } from '@iconify/react';
@@ -18,7 +19,8 @@ import {
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useLoginMutation } from '../../../redux/medbookAPI';
-import Auth from '../../../auth';
+import { login as loginAction } from '../../../redux/authSlice';
+
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
@@ -32,12 +34,13 @@ export default function LoginForm() {
 
   const [login] = useLoginMutation();
 
+  const dispatch = useDispatch();
+
   const handleLogin = async () => {
     if (!formik || !formik.isValid) return null;
     try {
       const userInfo = await login(formik.values).unwrap();
-
-      Auth.login(() => localStorage.setItem('userInfo', JSON.stringify(userInfo)), userInfo);
+      dispatch(loginAction({ info: userInfo }));
       navigate('/dashboard', { replace: true });
     } catch (e) {
       console.error('Не удалось войти в систему ', e);
