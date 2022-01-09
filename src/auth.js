@@ -3,7 +3,6 @@ import { ROLES } from './constants';
 class Auth {
   constructor() {
     const authStateFromLocalStore = localStorage.getItem('userInfo');
-    console.log('authStateFromLocalStore ', authStateFromLocalStore);
     if (authStateFromLocalStore) {
       this.authenticated = true;
       this.role = authStateFromLocalStore.isDoctor ? ROLES.DOCTOR : ROLES.PATIENT;
