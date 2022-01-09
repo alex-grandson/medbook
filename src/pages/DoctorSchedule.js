@@ -2,6 +2,7 @@ import React from 'react';
 import { Container } from '@mui/material';
 import WeekDayCard from '../components/schedule/WeekDayCard';
 import Page from '../components/Page';
+import { useGetScheduleQuery } from '../redux/medbookAPI';
 
 export default function DoctorSchedule() {
   const data = [
@@ -73,6 +74,8 @@ export default function DoctorSchedule() {
       ]
     }
   ];
+
+  // const data = useGetScheduleQuery(2);
   return (
     <Page title="Расписание приема | Medbook">
       <Container>

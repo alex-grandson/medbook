@@ -1,11 +1,6 @@
 import React from 'react';
 import { Divider, Stack, Typography } from '@mui/material';
 
-/*
-время приема
-слот * 30 минут + 9 часов
- */
-
 const timePeriod = {
   1: '9:00',
   2: '9:30',

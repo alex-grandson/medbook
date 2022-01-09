@@ -35,7 +35,7 @@ export default function Router() {
         },
         {
           path: 'schedule',
-          element: !isDoctor ? <DoctorSchedule /> : <Navigate to="/dashboard" />
+          element: isDoctor ? <DoctorSchedule /> : <Navigate to="/dashboard" />
         },
         { path: 'appointments', element: <Appointments /> },
         { path: 'appointment', element: <MakeAppointment /> },

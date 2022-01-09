@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
+import { Typography, Container, Stack, Button, Card } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { Typography, Container, Stack, Card, Button } from '@mui/material';
 import { Edit as EditIcon } from '@mui/icons-material';
-
 import Page from '../components/Page';
 
 import EditUserDialog from '../components/EditUserDialog';
