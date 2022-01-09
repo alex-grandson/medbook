@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react';
+import Calendar from '@iconify/icons-eva/calendar-outline';
 import pieChart2Fill from '@iconify/icons-eva/pie-chart-2-fill';
 import peopleFill from '@iconify/icons-eva/people-fill';
 import shoppingBagFill from '@iconify/icons-eva/shopping-bag-fill';
@@ -17,6 +18,12 @@ const sidebarConfig = [
     path: '/dashboard/app',
     icon: getIcon(pieChart2Fill),
     visibleForRoles: [ROLES.DOCTOR, ROLES.PATIENT]
+  },
+  {
+    title: 'Расписание',
+    path: '/dashboard/schedule',
+    icon: getIcon(Calendar),
+    visibleForRoles: [ROLES.DOCTOR]
   },
   {
     title: 'Пациенты',

@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
-import { Typography, Container, Stack, Button, Card } from '@mui/material';
-import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { Typography, Container, Stack, Card, Button } from '@mui/material';
+import { Edit as EditIcon } from '@mui/icons-material';
+
 import Page from '../components/Page';
 
-import { USER } from '../_mocks_/profile';
-import { useGetUsersQuery } from '../redux/medbookAPI';
+import EditPatientDialog from '../components/EditPatientDialog';
 
 export default function Profile() {
-  const [login, setLogin] = useState('zemly@mail.ru');
-  const { data = [], isLoading } = useGetUsersQuery(login);
-  console.log(data);
+  const userData = useSelector((state) => state.auth.userInfo);
 
-  if (isLoading) return <p>Загрузка...</p>;
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <Page title="Профиль | Medbook">
+      {showModal && (
+        <EditPatientDialog onClose={() => setShowModal(false)} onShow={() => setShowModal(true)} />
+      )}
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
@@ -23,14 +25,23 @@ export default function Profile() {
         </Stack>
         <Card style={{ padding: 15 }}>
           <Typography variant="h5" gutterBottom>
-            {data[0].lastName} {data[0].firstName}
+            {userData?.lastName} {userData?.firstName}
           </Typography>
           <Typography variant="body1">Электронная почта:</Typography>
           <Typography variant="subtitle1" sx={{ mb: 1 }}>
-            {data[0].login}
+            {userData?.email}
           </Typography>
           <Typography variant="body1">Дата рождения:</Typography>
-          <Typography variant="subtitle1">{data[0].birthDate}</Typography>
+          <Typography variant="subtitle1">{userData?.birthDate}</Typography>
+          <Button
+            sx={{ marginTop: '8px' }}
+            aria-label="delete"
+            variant="contained"
+            startIcon={<EditIcon />}
+            onClick={() => setShowModal(true)}
+          >
+            Изменить информацию
+          </Button>
         </Card>
       </Container>
     </Page>
