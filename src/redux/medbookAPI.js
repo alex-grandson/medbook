@@ -19,6 +19,9 @@ export const medbookAPI = createApi({
     makeAppointment: build.mutation({
       query: (body = {}) => ({ url: '/appointment', method: 'POST', body })
     }),
+    getSchedule: build.query({
+      query: (doctorId = {}) => ({ url: '/schedule', method: 'GET', doctorId })
+    }),
     editUser: build.mutation({
       query: (body = {}) => ({ url: '/editUser', method: 'POST', body })
     })
@@ -31,5 +34,6 @@ export const {
   useRegistrationMutation,
   useLoginMutation,
   useMakeAppointmentMutation,
+  useGetScheduleQuery,
   useEditUserMutation
 } = medbookAPI;

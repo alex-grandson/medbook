@@ -7,7 +7,7 @@
       "lastName": "Землянский",
       "age": 34,
       "birthDate": "10.10.1984",
-      "role": "patient"
+      "isDoctor": false
     },
     {
       "id": 2,
@@ -17,60 +17,6 @@
       "age": 30,
       "birthDate": "12.12.1988",
       "role": "doctor"
-    },
-    {
-      "firstName": "выавыа",
-      "lastName": "ываываы",
-      "email": "forgwent@gmail.com",
-      "password": "ffdgfdg",
-      "birthDate": "2022-01-09",
-      "isDoctor": true,
-      "id": 3
-    },
-    {
-      "firstName": "sdfsdf",
-      "lastName": "sdfsdf",
-      "email": "forgwent@gmail.com",
-      "password": "sdfsdf",
-      "birthDate": "2022-01-09",
-      "isDoctor": false,
-      "id": 4
-    },
-    {
-      "firstName": "sdfsdf",
-      "lastName": "sdfsdf",
-      "email": "forgwent@gmail.com",
-      "password": "sdfsdff",
-      "birthDate": "2022-01-09",
-      "isDoctor": false,
-      "id": 5
-    },
-    {
-      "firstName": "fdgfgfdg",
-      "lastName": "dfgdgfdgdf",
-      "email": "kurokhtintm@student.bmstu.ru",
-      "password": "sdfsdfsdf",
-      "birthDate": "2022-01-09",
-      "isDoctor": true,
-      "id": 6
-    },
-    {
-      "firstName": "sdfsdf",
-      "lastName": "sdfsdfs",
-      "email": "forgwent@gmail.com",
-      "password": "sdfsdfsf",
-      "birthDate": "2022-01-09",
-      "isDoctor": false,
-      "id": 7
-    },
-    {
-      "firstName": "sdfdsf",
-      "lastName": "sdfsdfds",
-      "email": "forgwent@gmail.com",
-      "password": "dsfsdfds",
-      "birthDate": "2022-01-09",
-      "isDoctor": false,
-      "id": 8
     }
   ],
   "doctorHistory": [],
@@ -100,19 +46,72 @@
       "bodyPart": "heart"
     }
   ],
-  "timetable": [
+  "schedule": [
     {
       "doctorId": 2,
-      "date": "23.12.2021",
+      "date": "2022-01-09",
       "slots": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        15,
-        16
+        {
+          "timeSlot": 1,
+          "patientId": 1,
+          "firstName": "Петр Валерьевич",
+          "lastName": "Землянский",
+          "message": "Курсач вот чет поднывает"
+        },
+        {
+          "timeSlot": 2,
+          "patientId": 1,
+          "firstName": "Петр Валерьевич",
+          "lastName": "Землянский",
+          "message": "И сессия пиздец"
+        },
+        {
+          "timeSlot": 5,
+          "patientId": 1,
+          "firstName": "Герман Данилович",
+          "lastName": "Фирштейн",
+          "message": "Сосудики проверить там можно да"
+        }
+      ]
+    },
+    {
+      "doctorId": 2,
+      "date": "2022-01-10",
+      "slots": [
+        {
+          "timeSlot": 2,
+          "patientId": 1,
+          "firstName": "Петр Валерьевич",
+          "lastName": "Землянский",
+          "message": "А пересдать можно да"
+        },
+        {
+          "timeSlot": 3,
+          "patientId": 1,
+          "firstName": "Петр Валерьевич",
+          "lastName": "Землянский",
+          "message": "А я просто так пришел"
+        },
+        {
+          "timeSlot": 7,
+          "patientId": 1,
+          "firstName": "Герман Данилович",
+          "lastName": "Фирштейн",
+          "message": "Вот моторчик бы почистить"
+        }
+      ]
+    },
+    {
+      "doctorId": 2,
+      "date": "2022-01-14",
+      "slots": [
+        {
+          "timeSlot": 2,
+          "patientId": 10,
+          "firstName": "брат",
+          "lastName": "Джума намаз",
+          "message": "Не пропусти"
+        }
       ]
     }
   ],
