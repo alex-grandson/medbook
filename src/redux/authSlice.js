@@ -10,10 +10,12 @@ export const authSlice = createSlice({
     userInfo: undefined
   },
   reducers: {
-    setProperties: (state, { payload: { authenticated, role, userInfo } }) => {
-      state.authenticated = authenticated;
-      state.role = role;
-      state.userInfo = userInfo;
+    setProperties: (state, { payload: { newUserInfo } }) => {
+      const { userInfo } = state;
+      userInfo.birthDate = newUserInfo.birthDate;
+      userInfo.email = newUserInfo.email;
+      userInfo.firstName = newUserInfo.firstName;
+      userInfo.lastName = newUserInfo.lastName;
       return state;
     },
     login: (state, { payload: { info } }) => {

@@ -15,7 +15,7 @@ import {
 import { setProperties as setPropertiesAction } from '../redux/authSlice';
 import { useEditUserMutation } from '../redux/medbookAPI';
 
-const EditPatientDialog = ({ onClose, onShow }) => {
+const EditUserDialog = ({ onClose, onShow }) => {
   const userInfo = useSelector((state) => state.auth.userInfo);
 
   const [editUser] = useEditUserMutation();
@@ -23,11 +23,11 @@ const EditPatientDialog = ({ onClose, onShow }) => {
   const dispatch = useDispatch();
 
   const handleEditUser = async () => {
-    console.log(formik);
     if (!formik || !formik.isValid) return null;
     try {
-      const userInfo = await editUser(formik.values);
-      dispatch(setPropertiesAction({ autheticated: true, role: userInfo.role, userInfo }));
+      const { data: userInfo } = await editUser(formik.values);
+      dispatch(setPropertiesAction({ newUserInfo: userInfo }));
+      onClose();
     } catch (e) {
       console.error('Не удалось изменить информацию о пользователе ', e);
     }
@@ -110,9 +110,9 @@ const EditPatientDialog = ({ onClose, onShow }) => {
   );
 };
 
-EditPatientDialog.propTypes = {
+EditUserDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
   onShow: PropTypes.func.isRequired
 };
 
-export default EditPatientDialog;
+export default EditUserDialog;
