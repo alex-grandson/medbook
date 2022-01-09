@@ -17,6 +17,60 @@
       "age": 30,
       "birthDate": "12.12.1988",
       "role": "doctor"
+    },
+    {
+      "firstName": "выавыа",
+      "lastName": "ываываы",
+      "email": "forgwent@gmail.com",
+      "password": "ffdgfdg",
+      "birthDate": "2022-01-09",
+      "isDoctor": true,
+      "id": 3
+    },
+    {
+      "firstName": "sdfsdf",
+      "lastName": "sdfsdf",
+      "email": "forgwent@gmail.com",
+      "password": "sdfsdf",
+      "birthDate": "2022-01-09",
+      "isDoctor": false,
+      "id": 4
+    },
+    {
+      "firstName": "sdfsdf",
+      "lastName": "sdfsdf",
+      "email": "forgwent@gmail.com",
+      "password": "sdfsdff",
+      "birthDate": "2022-01-09",
+      "isDoctor": false,
+      "id": 5
+    },
+    {
+      "firstName": "fdgfgfdg",
+      "lastName": "dfgdgfdgdf",
+      "email": "kurokhtintm@student.bmstu.ru",
+      "password": "sdfsdfsdf",
+      "birthDate": "2022-01-09",
+      "isDoctor": true,
+      "id": 6
+    },
+    {
+      "firstName": "sdfsdf",
+      "lastName": "sdfsdfs",
+      "email": "forgwent@gmail.com",
+      "password": "sdfsdfsf",
+      "birthDate": "2022-01-09",
+      "isDoctor": false,
+      "id": 7
+    },
+    {
+      "firstName": "sdfdsf",
+      "lastName": "sdfsdfds",
+      "email": "forgwent@gmail.com",
+      "password": "dsfsdfds",
+      "birthDate": "2022-01-09",
+      "isDoctor": false,
+      "id": 8
     }
   ],
   "doctorHistory": [],
@@ -50,7 +104,16 @@
     {
       "doctorId": 2,
       "date": "23.12.2021",
-      "slots": [1, 2, 3, 4, 5, 6, 15, 16]
+      "slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        15,
+        16
+      ]
     }
   ],
   "appointment": [
