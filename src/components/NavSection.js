@@ -8,7 +8,7 @@ import arrowIosDownwardFill from '@iconify/icons-eva/arrow-ios-downward-fill';
 import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, List, Collapse, ListItemText, ListItemIcon, ListItemButton } from '@mui/material';
 
-import Auth from '../auth';
+import { useSelector } from 'react-redux';
 // ----------------------------------------------------------------------
 
 const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props} />)(
@@ -72,7 +72,9 @@ function NavItem({ item, active }) {
     fontWeight: 'fontWeightMedium'
   };
 
-  if (!item.visibleForRoles.includes(Auth.getRole())) return null;
+  const userRole = useSelector((state) => state.auth.role);
+
+  if (!item.visibleForRoles.includes(userRole)) return null;
 
   if (children) {
     return (

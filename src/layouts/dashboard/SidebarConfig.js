@@ -28,7 +28,7 @@ const sidebarConfig = [
     title: 'Профиль',
     path: '/dashboard/profile',
     icon: getIcon(shoppingBagFill),
-    visibleForRoles: [ROLES.DOCTOR, ROLES.PATIENT]
+    visibleForRoles: [ROLES.PATIENT]
   },
   {
     title: 'Профиль врача',
@@ -52,19 +52,19 @@ const sidebarConfig = [
     title: 'Вход',
     path: '/login',
     icon: getIcon(lockFill),
-    visibleForRoles: [ROLES.DOCTOR, ROLES.PATIENT]
+    visibleForRoles: []
   },
   {
     title: 'Регистрация',
     path: '/register',
     icon: getIcon(personAddFill),
-    visibleForRoles: [ROLES.DOCTOR, ROLES.PATIENT]
+    visibleForRoles: []
   },
   {
     title: 'Not found',
     path: '/404',
     icon: getIcon(alertTriangleFill),
-    visibleForRoles: [ROLES.DOCTOR, ROLES.PATIENT]
+    visibleForRoles: []
   }
 ];
 

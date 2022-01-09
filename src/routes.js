@@ -1,4 +1,5 @@
 import { Navigate, useRoutes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 // layouts
 import DashboardLayout from './layouts/dashboard';
 import LogoOnlyLayout from './layouts/LogoOnlyLayout';
@@ -12,29 +13,43 @@ import Profile from './pages/Profile';
 import DoctorProfile from './pages/DoctorProfile';
 import Appointments from './pages/Appointments';
 import MakeAppointment from './pages/MakeAppointment';
+import { ROLES } from './constants';
+
 // ----------------------------------------------------------------------
 
 export default function Router() {
+  const isAuthenticated = useSelector((state) => state.auth.authenticated);
+  const isDoctor = useSelector((state) => state.auth.role === ROLES.DOCTOR);
+
   return useRoutes([
     {
       path: '/dashboard',
-      element: <DashboardLayout />,
+      element: isAuthenticated ? <DashboardLayout /> : <Navigate to="/login" />,
       children: [
         { element: <Navigate to="/dashboard/profile" replace /> },
         { path: 'user', element: <User /> },
         { path: 'app', element: <DashboardApp /> },
         { path: 'appointments', element: <Appointments /> },
         { path: 'appointment', element: <MakeAppointment /> },
-        { path: 'profile', element: <Profile /> },
-        { path: 'doctor', element: <DoctorProfile /> }
+        { path: 'profile', element: !isDoctor ? <Profile /> : <Navigate to="/dashboard" /> },
+        {
+          path: 'doctor',
+          element: isDoctor ? <DoctorProfile /> : <Navigate to="/dashboard" />
+        }
       ]
     },
     {
       path: '/',
       element: <LogoOnlyLayout />,
       children: [
-        { path: 'login', element: <Login /> },
-        { path: 'register', element: <Register /> },
+        {
+          path: 'login',
+          element: !isAuthenticated ? <Login /> : <Navigate to="/dashboard" />
+        },
+        {
+          path: 'register',
+          element: !isAuthenticated ? <Register /> : <Navigate to="/dashboard" />
+        },
         { path: '404', element: <NotFound /> },
         { path: '/', element: <Navigate to="/dashboard" /> },
         { path: '*', element: <Navigate to="/404" /> }
