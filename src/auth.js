@@ -2,6 +2,14 @@ import { ROLES } from './constants';
 
 class Auth {
   constructor() {
+    const authStateFromLocalStore = localStorage.getItem('userInfo');
+    console.log('authStateFromLocalStore ', authStateFromLocalStore);
+    if (authStateFromLocalStore) {
+      this.authenticated = true;
+      this.role = authStateFromLocalStore.isDoctor ? ROLES.DOCTOR : ROLES.PATIENT;
+      this.userInfo = authStateFromLocalStore;
+      return null;
+    }
     this.authenticated = false;
     this.role = undefined;
     this.userInfo = undefined;
@@ -32,6 +40,7 @@ class Auth {
   logout(cb) {
     this.authenticated = false;
     this.role = undefined;
+    this.userInfo = undefined;
     cb();
   }
 

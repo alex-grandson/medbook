@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import homeFill from '@iconify/icons-eva/home-fill';
 import personFill from '@iconify/icons-eva/person-fill';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
@@ -43,6 +43,7 @@ export default function AccountPopover() {
   const navigate = useNavigate();
 
   const handleClick = () => {
+    Auth.logout(() => localStorage.removeItem('userInfo'));
     navigate('/login', { replace: true });
   };
 

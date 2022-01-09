@@ -54,7 +54,7 @@ export default function RegisterForm() {
         ...formik.values,
         role: formik.values.isDoctor ? ROLES.DOCTOR : ROLES.PATIENT
       };
-      Auth.login(() => null, userInfo);
+      Auth.login(() => localStorage.setItem('userInfo', JSON.stringify(userInfo)), userInfo);
       navigate('/dashboard', { replace: true });
     } catch (e) {
       console.error('Не удалось создать пользователя ', e);
