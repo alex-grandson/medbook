@@ -19,7 +19,7 @@ export const ORGAN_NAMES = [
   'репродуктивные органы'
 ];
 
-export const timePeriod = {
+export const TIME_PERIOD = {
   1: '9:00',
   2: '9:30',
   3: '10:00',
@@ -42,3 +42,8 @@ export const timePeriod = {
   20: '18:30',
   21: '19:00'
 };
+
+export const OBJECTIVELY = ['Неудовлетворительно', 'Удовлетворительно'];
+export const COMPLAINTS = ['Кашель', 'Рвота', 'Лень', 'Апатия', 'Аритмия'];
+export const DIAGNOSIS = ['COVID-19', 'ОРВИ', 'Обострение хитрости'];
+export const RECEIPT = ['Банки', 'Тщательное мытье рук', 'Уральские пельмени', 'Полоскание горла'];
