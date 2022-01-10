@@ -6,7 +6,6 @@ import AppointmentEvent from './AppointmentEvent';
 
 export default function WeekDayCard(props) {
   const { day, onShow, setSelectedUser } = props;
-  console.log(day);
   return (
     <Card style={{ padding: 30, marginBottom: 30 }}>
       <Stack

@@ -51,8 +51,6 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
 
   const account = useSelector((state) => state.auth.userInfo);
 
-  console.log('account ', account);
-
   const renderContent = (
     <Scrollbar
       sx={{

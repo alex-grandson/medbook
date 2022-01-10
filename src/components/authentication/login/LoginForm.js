@@ -42,8 +42,6 @@ export default function LoginForm() {
     try {
       const hashPassword = getHashCode(formik.values.password);
 
-      console.log('hashPasswordLog ', hashPassword);
-
       const [userInfo] = await login({
         email: formik.values.email,
         password: hashPassword
@@ -66,8 +64,6 @@ export default function LoginForm() {
     validationSchema: LoginSchema,
     onSubmit: handleLogin
   });
-
-  console.log('formik ', formik);
 
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
 

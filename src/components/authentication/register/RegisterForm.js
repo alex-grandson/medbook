@@ -68,8 +68,6 @@ export default function RegisterForm() {
         password: hashPassword
       };
 
-      console.log('hashPasswordReg ', hashPassword);
-
       await register(userInfoToSend).unwrap();
 
       const userInfo = {
