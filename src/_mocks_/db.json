@@ -1,14 +1,4 @@
 {
-  "login": [
-    {
-      "id": 1
-    }
-  ],
-  "editUser": [
-    {
-      "id": 1
-    }
-  ],
   "user": [
     {
       "id": 1,
@@ -58,7 +48,7 @@
   ],
   "schedule": [
     {
-      "doctorId": 2,
+      "doctorId": 1,
       "date": "2022-01-09",
       "slots": [
         {
@@ -85,7 +75,7 @@
       ]
     },
     {
-      "doctorId": 2,
+      "doctorId": 1,
       "date": "2022-01-10",
       "slots": [
         {
@@ -112,9 +102,31 @@
       ]
     },
     {
-      "doctorId": 2,
-      "date": "23.12.2021",
-      "slots": [1, 2, 3, 4, 5, 6, 15, 16]
+      "doctorId": 1,
+      "date": "2022-01-11",
+      "slots": [
+        {
+          "timeSlot": 1,
+          "patientId": 1,
+          "firstName": "Петр Валерьевич",
+          "lastName": "Землянский",
+          "message": "Курсач вот чет поднывает"
+        },
+        {
+          "timeSlot": 2,
+          "patientId": 1,
+          "firstName": "Петр Валерьевич",
+          "lastName": "Землянский",
+          "message": "И сессия пиздец"
+        },
+        {
+          "timeSlot": 5,
+          "patientId": 1,
+          "firstName": "Герман Данилович",
+          "lastName": "Фирштейн",
+          "message": "Сосудики проверить там можно да"
+        }
+      ]
     }
   ],
   "appointment": [

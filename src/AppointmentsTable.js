@@ -59,10 +59,10 @@ function Row(props) {
                 <b>Температура:</b> {row.temp}
               </Typography>
               <Typography style={{ marginBottom: '20px' }} variant="p" gutterBottom component="div">
-                <b>А. Д.:</b> {row.blood_pressure}
+                <b>А. Д.:</b> {row.blood_pressure} мм рт.ст.
               </Typography>
               <Typography style={{ marginBottom: '20px' }} variant="p" gutterBottom component="div">
-                <b>Пульс:</b> {row.pulse}
+                <b>Пульс:</b> {row.pulse}’
               </Typography>
               <Typography style={{ marginBottom: '20px' }} variant="p" gutterBottom component="div">
                 <b>Примечание:</b> {row.application}

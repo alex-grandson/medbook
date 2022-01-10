@@ -20,8 +20,9 @@ export const authSlice = createSlice({
     },
     login: (state, { payload: { info } }) => {
       state.authenticated = true;
-      state.role = info.role;
-      state.userInfo = info;
+      const role = info.isDoctor ? ROLES.DOCTOR : ROLES.PATIENT;
+      state.role = role;
+      state.userInfo = { ...info, role };
       return state;
     },
     setRole: (state, { payload: { role } }) => {

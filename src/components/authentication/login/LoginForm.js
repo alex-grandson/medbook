@@ -20,6 +20,7 @@ import {
 import { LoadingButton } from '@mui/lab';
 import { useLoginMutation } from '../../../redux/medbookAPI';
 import { login as loginAction } from '../../../redux/authSlice';
+import { getHashCode } from '../../../utils/hash';
 
 // ----------------------------------------------------------------------
 
@@ -39,7 +40,13 @@ export default function LoginForm() {
   const handleLogin = async () => {
     if (!formik || !formik.isValid) return null;
     try {
-      const userInfo = await login(formik.values).unwrap();
+      const hashPassword = getHashCode(formik.values.password);
+
+      const [userInfo] = await login({
+        email: formik.values.email,
+        password: hashPassword
+      }).unwrap();
+
       dispatch(loginAction({ info: userInfo }));
       navigate('/dashboard', { replace: true });
     } catch (e) {
