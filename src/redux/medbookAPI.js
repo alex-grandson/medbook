@@ -7,6 +7,12 @@ export const medbookAPI = createApi({
     getDoctors: build.query({
       query: (bodyPart = '') => `doctor?${bodyPart && `bodyPart=${bodyPart}`}`
     }),
+    getSchedule: build.query({
+      query: (doctorId = '') => `getSchedule?${doctorId && `doctorId=${doctorId}`}`
+    }),
+    getDoctorById: build.query({
+      query: (id = '') => `doctor?${id && `id=${id}`}`
+    }),
     getUsers: build.query({
       query: (login = '') => `user?_limit=1&${login && `login=${login}`}`
     }),
@@ -19,21 +25,23 @@ export const medbookAPI = createApi({
     makeAppointment: build.mutation({
       query: (body = {}) => ({ url: '/appointment', method: 'POST', body })
     }),
-    getSchedule: build.query({
-      query: (doctorId = {}) => ({ url: '/schedule', method: 'GET', doctorId })
-    }),
     editUser: build.mutation({
       query: (body = {}) => ({ url: '/editUser', method: 'POST', body })
+    }),
+    markAppointment: build.mutation({
+      query: (body = {}) => ({ url: '/markAppointment', method: 'POST', body })
     })
   })
 });
 
 export const {
   useGetDoctorsQuery,
+  useGetDoctorByIdQuery,
   useGetUsersQuery,
   useRegistrationMutation,
   useLoginMutation,
   useMakeAppointmentMutation,
   useGetScheduleQuery,
-  useEditUserMutation
+  useEditUserMutation,
+  useMarkAppointmentMutation
 } = medbookAPI;

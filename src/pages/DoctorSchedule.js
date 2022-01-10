@@ -1,86 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container } from '@mui/material';
+import { useSelector } from 'react-redux';
 import WeekDayCard from '../components/schedule/WeekDayCard';
 import Page from '../components/Page';
 import { useGetScheduleQuery } from '../redux/medbookAPI';
+import MarkAppointmentDialog from '../components/schedule/MarkAppointmentDialog';
 
 export default function DoctorSchedule() {
-  const data = [
-    {
-      doctorId: 2,
-      date: '2022-01-09',
-      slots: [
-        {
-          timeSlot: 1,
-          patientId: 1,
-          firstName: 'Петр Валерьевич',
-          lastName: 'Землянский',
-          message: 'Курсач вот чет поднывает'
-        },
-        {
-          timeSlot: 2,
-          patientId: 1,
-          firstName: 'Петр Валерьевич',
-          lastName: 'Землянский',
-          message: 'И сессия пиздец'
-        },
-        {
-          timeSlot: 5,
-          patientId: 1,
-          firstName: 'Герман Данилович',
-          lastName: 'Фирштейн',
-          message: 'Сосудики проверить там можно да'
-        }
-      ]
-    },
-    {
-      doctorId: 2,
-      date: '2022-01-10',
-      slots: [
-        {
-          timeSlot: 2,
-          patientId: 1,
-          firstName: 'Петр Валерьевич',
-          lastName: 'Землянский',
-          message: 'А пересдать можно да'
-        },
-        {
-          timeSlot: 3,
-          patientId: 1,
-          firstName: 'Петр Валерьевич',
-          lastName: 'Землянский',
-          message: 'А я просто так пришел'
-        },
-        {
-          timeSlot: 7,
-          patientId: 1,
-          firstName: 'Герман Данилович',
-          lastName: 'Фирштейн',
-          message: 'Вот моторчик бы почистить'
-        }
-      ]
-    },
-    {
-      doctorId: 2,
-      date: '2022-01-14',
-      slots: [
-        {
-          timeSlot: 2,
-          patientId: 10,
-          firstName: 'брат',
-          lastName: 'Джума намаз',
-          message: 'Не пропусти'
-        }
-      ]
-    }
-  ];
+  const userInfo = useSelector((state) => state.auth.userInfo);
+  const { data = [], isLoading } = useGetScheduleQuery(2);
+  console.log(1, data);
+  console.log(1, isLoading);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(data[0].slots[0].patientId);
+  console.log(2, data);
 
-  // const data = useGetScheduleQuery(2);
+  if (isLoading) return <p>Загрузка...</p>;
+  console.log(3, data);
   return (
     <Page title="Расписание приема | Medbook">
       <Container>
+        {showModal && (
+          <MarkAppointmentDialog
+            onClose={() => setShowModal(false)}
+            onShow={() => setShowModal(true)}
+          />
+        )}
         {data.map((day) => (
-          <WeekDayCard day={day} />
+          <WeekDayCard day={day} onShow={setShowModal} setSelectedUser={setSelectedUser} />
         ))}
       </Container>
     </Page>
