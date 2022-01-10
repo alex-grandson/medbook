@@ -26,6 +26,8 @@ import { useRegistrationMutation } from '../../../redux/medbookAPI';
 import { login as loginAction } from '../../../redux/authSlice';
 import { ROLES, ORGAN_NAMES } from '../../../constants';
 
+import { getHashCode } from '../../../utils/hash';
+
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
@@ -59,11 +61,22 @@ export default function RegisterForm() {
   const handleRegister = async () => {
     if (!formik || !formik.isValid) return null;
     try {
-      await register(formik.values).unwrap();
+      const hashPassword = getHashCode(formik.values.password);
+
+      const userInfoToSend = {
+        ...formik.values,
+        password: hashPassword
+      };
+
+      console.log('hashPasswordReg ', hashPassword);
+
+      await register(userInfoToSend).unwrap();
+
       const userInfo = {
         ...formik.values,
         role: formik.values.isDoctor ? ROLES.DOCTOR : ROLES.PATIENT
       };
+
       dispatch(loginAction({ info: userInfo }));
       navigate('/dashboard', { replace: true });
     } catch (e) {

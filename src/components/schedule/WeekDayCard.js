@@ -23,8 +23,13 @@ export default function WeekDayCard(props) {
           {moment(day.date).format('DD.MM')}
         </Typography>
       </Stack>
-      {day.slots.map((slot) => (
-        <AppointmentEvent event={slot} onShow={onShow} setSelectedUser={setSelectedUser} />
+      {day.slots.map((slot, idx) => (
+        <AppointmentEvent
+          key={idx}
+          event={slot}
+          onShow={onShow}
+          setSelectedUser={setSelectedUser}
+        />
       ))}
     </Card>
   );

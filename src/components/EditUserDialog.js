@@ -22,10 +22,14 @@ const EditUserDialog = ({ onClose, onShow }) => {
 
   const dispatch = useDispatch();
 
+  const oldUserInfo = useSelector((state) => state.auth.userInfo);
+
   const handleEditUser = async () => {
     if (!formik || !formik.isValid) return null;
     try {
-      const { data: userInfo } = await editUser(formik.values);
+      const updatedUserInfo = { ...oldUserInfo, ...formik.values };
+      console.log('updatedUserInfo ', updatedUserInfo);
+      const { data: userInfo } = await editUser(updatedUserInfo);
       dispatch(setPropertiesAction({ newUserInfo: userInfo }));
       onClose();
     } catch (e) {
