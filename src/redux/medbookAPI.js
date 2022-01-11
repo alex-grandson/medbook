@@ -4,14 +4,26 @@ export const medbookAPI = createApi({
   reducerPath: 'medbookAPI',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001/' }),
   endpoints: (build) => ({
-    getDoctors: build.query({
-      query: (bodyPart = '') => `doctor?${bodyPart && `bodyPart=${bodyPart}`}`
+    getDoctor: build.query({
+      query: (bodyPart = '') => `/user?isDoctor=true&${bodyPart && `bodyPart=${bodyPart}`}`
     }),
-    getSchedule: build.query({
-      query: (doctorId = '') => `schedule?${doctorId && `doctorId=${doctorId}`}`
+    getDoctorSchedule: build.query({
+      query: (doctorId = '') => `/appointment?${doctorId && `doctorId=${doctorId}`}`
+    }),
+    getPatientSchedule: build.query({
+      query: (patientId = '') => `/appointment?${patientId && `patientId=${patientId}`}`
+    }),
+    makeAppointment: build.mutation({
+      query: (body = {}) => ({ url: '/appointment', method: 'POST', body })
+    }),
+    markAppointment: build.mutation({
+      query: (body = {}) => {
+        const { id } = body;
+        return { url: `/appointment/${id}`, method: 'PUT', body: { ...body } };
+      }
     }),
     getDoctorById: build.query({
-      query: (id = '') => `doctor?${id && `id=${id}`}`
+      query: (id = '') => `user?isDoctor=true&${id && `id=${id}`}`
     }),
     getUsers: build.query({
       query: (login = '') => `user?_limit=1&${login && `login=${login}`}`
@@ -25,29 +37,27 @@ export const medbookAPI = createApi({
     registration: build.mutation({
       query: (body = {}) => ({ url: '/user', method: 'POST', body })
     }),
-    makeAppointment: build.mutation({
-      query: (body = {}) => ({ url: '/appointment', method: 'POST', body })
-    }),
     editUser: build.mutation({
       query: (body = {}) => {
         const { id } = body;
         return { url: `/user/${id}`, method: 'PUT', body: { ...body } };
       }
-    }),
-    markAppointment: build.mutation({
-      query: (body = {}) => ({ url: '/markAppointment', method: 'POST', body })
     })
+    // markAppointment: build.mutation({
+    //   query: (body = {}) => ({ url: '/markAppointment', method: 'POST', body })
+    // })
   })
 });
 
 export const {
-  useGetDoctorsQuery,
+  useGetDoctorQuery,
   useGetDoctorByIdQuery,
   useGetUsersQuery,
   useRegistrationMutation,
   useLoginMutation,
   useMakeAppointmentMutation,
-  useGetScheduleQuery,
+  useGetDoctorScheduleQuery,
+  useGetPatientScheduleQuery,
   useEditUserMutation,
   useMarkAppointmentMutation
 } = medbookAPI;

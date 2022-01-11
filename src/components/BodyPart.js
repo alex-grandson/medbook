@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material';
+import { ORGAN_NAMES } from '../constants';
 
 export default function BodyPart({ imageName, onClick, isChecked, key }) {
   return (
@@ -10,8 +11,8 @@ export default function BodyPart({ imageName, onClick, isChecked, key }) {
           isChecked ? styles.checked : isChecked === undefined ? styles.default : styles.unchecked
         }
       >
-        <img src={`/assets/body_parts/${imageName}.png`} alt={imageName} height={90} />
-        <Typography variant="body1">{imageName}</Typography>
+        <img src={`/assets/body_parts/${imageName}.png`} alt={ORGAN_NAMES[imageName]} height={90} />
+        <Typography variant="body1">{ORGAN_NAMES[imageName]}</Typography>
       </Box>
     </>
   );

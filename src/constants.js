@@ -3,21 +3,53 @@ export const ROLES = {
   PATIENT: 'patient'
 };
 
-export const ORGAN_NAMES = [
-  'мозг',
-  'щитовидная железа',
-  'печень',
-  'желчный пузырь',
-  'живот',
-  'почки',
-  'мочевой пузырь',
-  'сердце',
-  'легкие',
-  'селезенка',
-  'поджелудочная железа',
-  'кишечник',
-  'репродуктивные органы'
-];
+export const ORGANS_DEFAULT = {
+  brain: undefined,
+  thyroid: undefined,
+  liver: undefined,
+  gallbladder: undefined,
+  stomach: undefined,
+  kidneys: undefined,
+  bladder: undefined,
+  heart: undefined,
+  lungs: undefined,
+  spleen: undefined,
+  pancreas: undefined,
+  intestine: undefined,
+  reproductive: undefined
+};
+
+export const ORGAN_NAMES = {
+  brain: 'Мозг',
+  thyroid: 'Щитовидная железа',
+  liver: 'Печень',
+  gallbladder: 'Желчный пузырь',
+  stomach: 'Живот',
+  kidneys: 'Почки',
+  bladder: 'Мочевой пузырь',
+  heart: 'Сердце',
+  lungs: 'Легкие',
+  spleen: 'Селезенка',
+  pancreas: 'Поджелудочная железа',
+  intestine: 'Кишечник',
+  reproductive: 'Репродуктивные органы'
+};
+
+export const SPECIALIZATIONS = {
+  brain: 'Нейрохирург',
+  thyroid: 'Щитовидная железа',
+  liver: 'Печень',
+  gallbladder: 'Желчный пузырь',
+  stomach: 'Живот',
+  kidneys: 'Почки',
+  bladder: 'Мочевой пузырь',
+  heart: 'Кардиохирург',
+  lungs: 'Легкие',
+  spleen: 'Селезенка',
+  pancreas: 'Поджелудочная железа',
+  intestine: 'Кишечник',
+  reproductive: 'Репродуктивные органы'
+};
 
 export const TIME_PERIOD = {
   1: '9:00',

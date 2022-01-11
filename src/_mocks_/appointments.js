@@ -5,7 +5,7 @@ export const APPOINTMENTS = [
     meetDate: '22.12.2021',
     doctorId: 2,
     doctorLogin: 'best_doc@bk.ru',
-    doctorName: 'Нурфат Расулович Кайратов',
+    doctorName: 'Нурт Расулович Кайратов',
     doctorSpec: 'Офтальмолог',
     doctorRoom: 398,
     complaints: '',

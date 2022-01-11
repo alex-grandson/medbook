@@ -24,7 +24,7 @@ import { LoadingButton } from '@mui/lab';
 
 import { useRegistrationMutation } from '../../../redux/medbookAPI';
 import { login as loginAction } from '../../../redux/authSlice';
-import { ROLES, ORGAN_NAMES } from '../../../constants';
+import { ROLES, ORGAN_NAMES, SPECIALIZATIONS, ORGANS_DEFAULT } from '../../../constants';
 
 import { getHashCode } from '../../../utils/hash';
 
@@ -51,7 +51,7 @@ export default function RegisterForm() {
       .min(new Date('01.01.1900'), 'Введите корректную дату!')
       .max(new Date(), 'Введите корректную дату')
       .required('Дата рождения: Обязательное поле'),
-    specialization: Yup.string()
+    bodyPart: Yup.string()
   });
 
   const [register] = useRegistrationMutation();
@@ -90,7 +90,7 @@ export default function RegisterForm() {
       password: '',
       birthDate: format(new Date(), 'yyyy-MM-dd'),
       isDoctor: false,
-      specialization: undefined
+      bodyPart: ''
     },
     validationSchema: RegisterSchema,
     onSubmit: handleRegister
@@ -166,24 +166,16 @@ export default function RegisterForm() {
               label="Я врач"
             />
           </Stack>
-
-          {showSpecialization && (
-            <FormControl>
-              <InputLabel id="test-select-label">Специализация</InputLabel>
-              <Select
-                {...getFieldProps('specialization')}
-                label="Специализация"
-                error={Boolean(touched.selectedDoctor && errors.selectedDoctor)}
-                helperText={touched.selectedDoctor && errors.selectedDoctor}
-              >
-                {ORGAN_NAMES.map((organName) => (
-                  <MenuItem key={organName} value={organName}>
-                    {organName}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          )}
+          <FormControl>
+            <InputLabel id="test-select-label">Специализация</InputLabel>
+            <Select {...getFieldProps('bodyPart')} label="Специализация">
+              {Object.keys(ORGANS_DEFAULT).map((organName) => (
+                <MenuItem key={organName} value={organName}>
+                  {SPECIALIZATIONS[organName]}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
 
           <LoadingButton
             fullWidth

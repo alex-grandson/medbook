@@ -35,9 +35,10 @@ export default function MarkAppointmentDialog({ onClose, onShow }) {
   };
   const formik = useFormik({
     initialValues: {
-      day: moment().format('DD.MM'),
-      patientId: userInfo.email,
-      complaints: ['Кашель', 'Рвота'],
+      doctorId: undefined,
+      patientId: userInfo.id,
+      date: moment().format('YYYY-MM-DD'),
+      complaints: 'Кашель Рвота',
       objectively: 'Неудовлетворительно',
       temp: '36.6',
       pulse: '68',

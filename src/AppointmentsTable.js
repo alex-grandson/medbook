@@ -15,12 +15,18 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useState } from 'react';
 import { Button } from '@mui/material';
+import { useSelector } from 'react-redux';
 import { APPOINTMENTS } from './_mocks_/appointments';
+import { TIME_PERIOD } from './constants';
+import { useGetDoctorByIdQuery, useGetPatientScheduleQuery } from './redux/medbookAPI';
 
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = useState(false);
+  const { doctor = {}, isLoading } = useGetDoctorByIdQuery(row.doctorId);
 
+  if (isLoading) return <p>Загрузка...</p>;
+  if (true) return <p>цуаауа</p>;
   return (
     <>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -33,8 +39,8 @@ function Row(props) {
           {row.doctorName}
         </TableCell>
         <TableCell align="left">{row.doctorSpec}</TableCell>
-        <TableCell align="left">{row.meetDate}</TableCell>
-        <TableCell align="left">{row.meetTime}</TableCell>
+        <TableCell align="left">{row.date}</TableCell>
+        <TableCell align="left">{TIME_PERIOD[row.timeSlot]}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -44,10 +50,10 @@ function Row(props) {
                 Визит №{row.id}
               </Typography>
               <Typography variant="h6" gutterBottom component="div">
-                Протокол приема врача ({row.doctorSpec})
+                Протокол приема врача (Офтальмолог)
               </Typography>
               <Typography style={{ marginBottom: '20px' }} variant="p" gutterBottom component="div">
-                <b>Прием:</b> {row.meetDate}
+                <b>Прием:</b> {row.date}
               </Typography>
               <Typography style={{ marginBottom: '20px' }} variant="p" gutterBottom component="div">
                 <b>Жалобы:</b> {row.complaints}
@@ -86,7 +92,9 @@ function Row(props) {
 }
 
 export default function AppointmentsTable() {
-  const [rows, setRows] = useState(APPOINTMENTS);
+  const userInfo = useSelector((state) => state.auth.userInfo);
+  const { rows = [], isLoading } = useGetPatientScheduleQuery(userInfo.email);
+  if (isLoading) return <p>Загрузка...</p>;
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -100,9 +108,10 @@ export default function AppointmentsTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <Row key={row.id} row={row} />
-          ))}
+          {/* Тимофей хэлп */}
+          {/* {rows.map((row) => ( */}
+          {/*  <div>sfwefefgwegwegwegwegew</div> */}
+          {/* )} */}
         </TableBody>
       </Table>
     </TableContainer>

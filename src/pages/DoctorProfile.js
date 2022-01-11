@@ -6,6 +6,7 @@ import { Edit as EditIcon } from '@mui/icons-material';
 import Page from '../components/Page';
 
 import EditUserDialog from '../components/EditUserDialog';
+import { SPECIALIZATIONS } from '../constants';
 
 export default function DoctorProfile() {
   const userData = useSelector((state) => state.auth.userInfo);
@@ -37,7 +38,7 @@ export default function DoctorProfile() {
           </Typography>
           <Typography variant="body1">Специализация:</Typography>
           <Typography variant="subtitle1" sx={{ mb: 1 }}>
-            {userData?.specialization}
+            {SPECIALIZATIONS[userData?.bodyPart]}
           </Typography>
           <Button
             sx={{ marginTop: '8px' }}

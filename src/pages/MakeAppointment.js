@@ -14,37 +14,24 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { DateTimePicker, LoadingButton } from '@mui/lab';
 import { Form, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useGetDoctorsQuery, useMakeAppointmentMutation } from '../redux/medbookAPI';
+import * as moment from 'moment';
+import { useSelector } from 'react-redux';
+import { useGetDoctorQuery, useMakeAppointmentMutation } from '../redux/medbookAPI';
 import BodyPart from '../components/BodyPart';
 import MakeAppointmentDialog from '../components/MakeAppointmentDialog';
-
-const ORGANS_DEFAULT = {
-  brain: undefined,
-  thyroid: undefined,
-  liver: undefined,
-  gallbladder: undefined,
-  stomach: undefined,
-  kidneys: undefined,
-  bladder: undefined,
-  heart: undefined,
-  lungs: undefined,
-  spleen: undefined,
-  pancreas: undefined,
-  intestine: undefined,
-  reproductive: undefined
-};
+import { ORGANS_DEFAULT, SPECIALIZATIONS } from '../constants';
 
 const ORGANS_NAMES = [...Object.keys(ORGANS_DEFAULT)];
 
 export default function MakeAppointment() {
   const [organs, setOrgans] = useState({ ...ORGANS_DEFAULT });
   const [selectedOrgan, setSelectedOrgan] = useState('');
-  const { data = [], isLoading } = useGetDoctorsQuery(selectedOrgan);
+  const { data = [], isLoading } = useGetDoctorQuery(selectedOrgan);
 
   const MakeAppointmentSchema = Yup.object().shape({
     comment: Yup.string(),
-    selectedDoctor: Yup.object().required('Выберите одного из доступных врачей'),
-    selectedDate: Yup.string()
+    doctorId: Yup.string().required('Выберите одного из доступных врачей'),
+    date: Yup.string()
   });
 
   const onBodyPartClick = (e, bodyPart) => {
@@ -62,6 +49,8 @@ export default function MakeAppointment() {
     });
   };
 
+  const userInfo = useSelector((state) => state.auth.userInfo);
+
   const [makeAppointment] = useMakeAppointmentMutation();
 
   const handleMakeAppointment = async () => {
@@ -77,8 +66,11 @@ export default function MakeAppointment() {
   const formik = useFormik({
     initialValues: {
       comment: '',
-      selectedDoctor: undefined,
-      selectedDate: new Date()
+      doctorId: '',
+      patientId: userInfo.email,
+      date: moment().format('YYYY-MM-DD'),
+      timeSlot: 1,
+      accepted: false
     },
     validationSchema: MakeAppointmentSchema,
     onSubmit: handleMakeAppointment
@@ -133,14 +125,14 @@ export default function MakeAppointment() {
 
                     <Select
                       disabled={!selectedOrgan || !data.length}
-                      {...getFieldProps('selectedDoctor')}
+                      {...getFieldProps('doctorId')}
                       placeholder="Врач"
-                      error={Boolean(touched.selectedDoctor && errors.selectedDoctor)}
-                      helperText={touched.selectedDoctor && errors.selectedDoctor}
+                      error={Boolean(touched.doctorId && errors.doctorId)}
+                      helperText={touched.doctorId && errors.doctorId}
                     >
                       {data.map((item) => (
                         <MenuItem key={item.id} value={item}>
-                          {item.lastName} {item.firstName} ({item.specialization})
+                          {item.lastName} {item.firstName} ({SPECIALIZATIONS[item.bodyPart]})
                         </MenuItem>
                       ))}
                     </Select>
@@ -149,10 +141,10 @@ export default function MakeAppointment() {
                       <DateTimePicker
                         renderInput={(props) => <TextField {...props} />}
                         label="Время приема"
-                        value={formik.values.selectedDate}
-                        onChange={(newValue) => setFieldValue('selectedDate', newValue)}
-                        error={Boolean(touched.selectedDate && errors.selectedDate)}
-                        helperText={touched.selectedDate && errors.selectedDate}
+                        value={formik.values.date}
+                        onChange={(newValue) => setFieldValue('date', newValue)}
+                        error={Boolean(touched.date && errors.date)}
+                        helperText={touched.date && errors.date}
                       />
                     </LocalizationProvider>
                   </Stack>

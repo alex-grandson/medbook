@@ -11,7 +11,7 @@ import User from './pages/User';
 import NotFound from './pages/Page404';
 import Profile from './pages/Profile';
 import DoctorProfile from './pages/DoctorProfile';
-import Appointments from './pages/Appointments';
+import PatientSchedule from './pages/PatientSchedule';
 import MakeAppointment from './pages/MakeAppointment';
 import { ROLES } from './constants';
 import DoctorSchedule from './pages/DoctorSchedule';
@@ -37,7 +37,7 @@ export default function Router() {
           path: 'schedule',
           element: isDoctor ? <DoctorSchedule /> : <Navigate to="/dashboard" />
         },
-        { path: 'appointments', element: <Appointments /> },
+        { path: 'appointments', element: <PatientSchedule /> },
         { path: 'appointment', element: <MakeAppointment /> },
         { path: 'profile', element: !isDoctor ? <Profile /> : <Navigate to="/dashboard" /> },
         {

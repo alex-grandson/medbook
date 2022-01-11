@@ -17,181 +17,96 @@
       "age": 30,
       "birthDate": "12.12.1988",
       "role": "doctor"
-    }
-  ],
-  "doctorHistory": [],
-  "doctor": [
-    {
-      "id": 1,
-      "login": "best_doc@bk.ru",
-      "firstName": "Нурфат Расулович",
-      "lastName": "Кайратов",
-      "specialization": "Нейрофизиология",
-      "urlPhoto": null,
-      "startWorkDay": "10:30:00",
-      "endWorkDay": "18:30:00",
-      "birthDate": "12.12.1988",
-      "bodyPart": "brain"
     },
     {
-      "id": 2,
-      "login": "vvvertex@ya.ru",
-      "firstName": "Фахри Ипполионович",
-      "lastName": "Гарбузов",
-      "specialization": "Кардиохирургия",
-      "urlPhoto": null,
-      "startWorkDay": "10:30:00",
-      "endWorkDay": "18:30:00",
-      "birthDate": "12.12.1988",
-      "bodyPart": "heart"
-    }
-  ],
-  "schedule": [
-    {
-      "doctorId": 1,
-      "date": "2022-01-09",
-      "slots": [
-        {
-          "timeSlot": 1,
-          "patientId": 1,
-          "firstName": "Петр Валерьевич",
-          "lastName": "Землянский",
-          "message": "Курсач вот чет поднывает"
-        },
-        {
-          "timeSlot": 2,
-          "patientId": 1,
-          "firstName": "Петр Валерьевич",
-          "lastName": "Землянский",
-          "message": "И сессия пиздец"
-        },
-        {
-          "timeSlot": 5,
-          "patientId": 1,
-          "firstName": "Герман Данилович",
-          "lastName": "Фирштейн",
-          "message": "Сосудики проверить там можно да"
-        }
-      ]
+      "firstName": "Беброчка",
+      "lastName": "Пажилая",
+      "email": "qw@qq.qq",
+      "password": 0,
+      "birthDate": "2022-01-11",
+      "isDoctor": false,
+      "id": 3
     },
     {
-      "doctorId": 1,
-      "date": "2022-01-10",
-      "slots": [
-        {
-          "timeSlot": 2,
-          "patientId": 1,
-          "firstName": "Петр Валерьевич",
-          "lastName": "Землянский",
-          "message": "А пересдать можно да"
-        },
-        {
-          "timeSlot": 3,
-          "patientId": 1,
-          "firstName": "Петр Валерьевич",
-          "lastName": "Землянский",
-          "message": "А я просто так пришел"
-        },
-        {
-          "timeSlot": 7,
-          "patientId": 1,
-          "firstName": "Герман Данилович",
-          "lastName": "Фирштейн",
-          "message": "Вот моторчик бы почистить"
-        }
-      ]
-    },
-    {
-      "doctorId": 1,
-      "date": "2022-01-11",
-      "slots": [
-        {
-          "timeSlot": 1,
-          "patientId": 1,
-          "firstName": "Петр Валерьевич",
-          "lastName": "Землянский",
-          "message": "Курсач вот чет поднывает"
-        },
-        {
-          "timeSlot": 2,
-          "patientId": 1,
-          "firstName": "Петр Валерьевич",
-          "lastName": "Землянский",
-          "message": "И сессия пиздец"
-        },
-        {
-          "timeSlot": 5,
-          "patientId": 1,
-          "firstName": "Герман Данилович",
-          "lastName": "Фирштейн",
-          "message": "Сосудики проверить там можно да"
-        }
-      ]
+      "firstName": "Алексей Олегович",
+      "lastName": "Сердцеведов",
+      "email": "qq@qq.qq",
+      "password": 3862,
+      "birthDate": "1999-01-11",
+      "isDoctor": true,
+      "bodyPart": "brain",
+      "id": 4
     }
   ],
   "appointment": [
     {
       "id": 1,
-      "meetTime": "10:30",
-      "meetDate": "22.12.2021",
-      "doctorLogin": "best_doc@bk.ru",
-      "doctorName": "Нурфат Расулович Кайратов",
-      "doctorSpec": "Офтальмология",
-      "doctorRoom": 398
+      "doctorId": "qq@qq.qq",
+      "patientId": "qw@qq.qq",
+      "timeSlot": 1,
+      "date": "2022-01-11",
+      "comment": "",
+      "complaints": "",
+      "objectively": "Состояние удовлетворительное",
+      "temp": "36.6",
+      "pulse": "68",
+      "blood_pressure": "110/70",
+      "diagnosis": "ОРВИ",
+      "application": "Кожные покровы и видимые слизистые без изменений, носовое дыхание свободное. Язык влажный, чистый. В легких везикулярное дыхание, хрипоты нет. Тоны сердца ритмичные, живой без болезненный",
+      "receipt": "полоскание, мытье.",
+      "accepted": true
     },
     {
       "id": 2,
-      "meetTime": "10:30",
-      "meetDate": "23.12.2021",
-      "doctorLogin": "best_doc@bk.ru",
-      "doctorName": "Нурфат Расулович Кайратов",
-      "doctorSpec": "Офтальмология",
-      "doctorRoom": 442
+      "doctorId": "qq@qq.qq",
+      "patientId": "qw@qq.qq",
+      "timeSlot": 2,
+      "date": "2022-01-11",
+      "comment": "",
+      "complaints": "",
+      "objectively": "Состояние удовлетворительное",
+      "temp": "36.7",
+      "pulse": "67",
+      "blood_pressure": "110/77",
+      "diagnosis": "ОРВИ",
+      "application": "Кожные покровы и видимые слизистые без изменений, носовое дыхание свободное. Язык влажный, чистый. В легких везикулярное дыхание, хрипоты нет. Тоны сердца ритмичные, живой без болезненный",
+      "receipt": "полоскание, мытье.",
+      "accepted": true
     },
     {
       "id": 3,
-      "meetTime": "15:30",
-      "meetDate": "25.12.2021",
-      "doctorLogin": "best_doc@bk.ru",
-      "doctorName": "Гарбузов Фахри Ипполионович",
-      "doctorSpec": "Нейрофизиология",
-      "doctorRoom": 658
+      "doctorId": "qq@qq.qq",
+      "patientId": 3,
+      "timeSlot": 1,
+      "date": "2022-01-11",
+      "comment": "",
+      "complaints": "",
+      "objectively": "Состояние удовлетворительное",
+      "temp": "36.7",
+      "pulse": "67",
+      "blood_pressure": "110/77",
+      "diagnosis": "ОРВИ",
+      "application": "Кожные покровы и видимые слизистые без изменений, носовое дыхание свободное. Язык влажный, чистый. В легких везикулярное дыхание, хрипоты нет. Тоны сердца ритмичные, живой без болезненный",
+      "receipt": "полоскание, мытье.",
+      "accepted": true
     },
     {
-      "id": 4,
-      "meetTime": "10:30",
-      "meetDate": "26.12.2021",
-      "doctorLogin": "best_doc@bk.ru",
-      "doctorName": "Попов Евгений Харитонович",
-      "doctorSpec": "Зубная хирургия",
-      "doctorRoom": 456
-    },
-    {
-      "id": 5,
-      "meetTime": "18:00",
-      "meetDate": "26.12.2021",
-      "doctorLogin": "best_doc@bk.ru",
-      "doctorName": "Попов Евгений Харитонович",
-      "doctorSpec": "Зубная хирургия",
-      "doctorRoom": 255
-    },
-    {
-      "id": 6,
-      "meetTime": "16:00",
-      "meetDate": "29.12.2021",
-      "doctorLogin": "best_doc@bk.ru",
-      "doctorName": "Нурфат Расулович Кайратов",
-      "doctorSpec": "Офтальмология",
-      "doctorRoom": 134
-    },
-    {
-      "id": 7,
-      "meetTime": "12:30",
-      "meetDate": "30.12.2021",
-      "doctorLogin": "best_doc@bk.ru",
-      "doctorName": "Гейзинберг Иоганн Асалович",
-      "doctorSpec": "Остиопатия",
-      "doctorRoom": 357
+      "comment": "сап двач",
+      "doctorId": {
+        "firstName": "Алексей Олегович",
+        "lastName": "Сердцеведов",
+        "email": "qq@qq.qq",
+        "password": 3862,
+        "birthDate": "1999-01-11",
+        "isDoctor": true,
+        "bodyPart": "brain",
+        "id": 4
+      },
+      "patientId": 3,
+      "date": "2022-01-11",
+      "timeSlot": 1,
+      "accepted": false,
+      "id": 4
     }
   ]
 }
