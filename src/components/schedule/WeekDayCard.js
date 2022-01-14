@@ -6,6 +6,7 @@ import AppointmentEvent from './AppointmentEvent';
 
 export default function WeekDayCard(props) {
   const { day, onShow, setSelectedUser } = props;
+  console.log(day);
   return (
     <Card style={{ padding: 30, marginBottom: 30 }}>
       <Stack
@@ -22,13 +23,8 @@ export default function WeekDayCard(props) {
           {moment(day.date).format('DD.MM')}
         </Typography>
       </Stack>
-      {day.slots.map((slot, idx) => (
-        <AppointmentEvent
-          key={idx}
-          event={slot}
-          onShow={onShow}
-          setSelectedUser={setSelectedUser}
-        />
+      {day.map((slot) => (
+        <AppointmentEvent slot={slot} onShow={onShow} setSelectedUser={setSelectedUser} />
       ))}
     </Card>
   );

@@ -8,7 +8,8 @@ export const medbookAPI = createApi({
       query: (bodyPart = '') => `/user?isDoctor=true&${bodyPart && `bodyPart=${bodyPart}`}`
     }),
     getDoctorSchedule: build.query({
-      query: (doctorId = '') => `/appointment?${doctorId && `doctorId=${doctorId}`}`
+      query: (doctorId = '') =>
+        `/appointment?_sort=date,timeSlot&_order=asc,asc${doctorId && `doctorId=${doctorId}`}`
     }),
     getPatientSchedule: build.query({
       query: (patientId = '') => `/appointment?${patientId && `patientId=${patientId}`}`
@@ -26,7 +27,7 @@ export const medbookAPI = createApi({
       query: (id = '') => `user?isDoctor=true&${id && `id=${id}`}`
     }),
     getUsers: build.query({
-      query: (login = '') => `user?_limit=1&${login && `login=${login}`}`
+      query: (login = '') => `user?_limit=1&${login && `email=${login}`}`
     }),
     login: build.mutation({
       query: (params) => {

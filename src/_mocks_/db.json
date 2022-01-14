@@ -76,7 +76,7 @@
     {
       "id": 3,
       "doctorId": "qq@qq.qq",
-      "patientId": 3,
+      "patientId": "qw@qq.qq",
       "timeSlot": 1,
       "date": "2022-01-11",
       "comment": "",
@@ -88,25 +88,8 @@
       "diagnosis": "ОРВИ",
       "application": "Кожные покровы и видимые слизистые без изменений, носовое дыхание свободное. Язык влажный, чистый. В легких везикулярное дыхание, хрипоты нет. Тоны сердца ритмичные, живой без болезненный",
       "receipt": "полоскание, мытье.",
-      "accepted": true
-    },
-    {
-      "comment": "сап двач",
-      "doctorId": {
-        "firstName": "Алексей Олегович",
-        "lastName": "Сердцеведов",
-        "email": "qq@qq.qq",
-        "password": 3862,
-        "birthDate": "1999-01-11",
-        "isDoctor": true,
-        "bodyPart": "brain",
-        "id": 4
-      },
-      "patientId": 3,
-      "date": "2022-01-11",
-      "timeSlot": 1,
-      "accepted": false,
-      "id": 4
+      "accepted": true,
+      "comment": "все крута!"
     }
   ]
 }
