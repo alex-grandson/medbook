@@ -16,17 +16,17 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useState } from 'react';
 import { Button } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { APPOINTMENTS } from './_mocks_/appointments';
-import { TIME_PERIOD } from './constants';
+import * as moment from 'moment';
+import { SPECIALIZATIONS, TIME_PERIOD } from './constants';
 import { useGetDoctorByIdQuery, useGetPatientScheduleQuery } from './redux/medbookAPI';
 
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = useState(false);
-  const { doctor = {}, isLoading } = useGetDoctorByIdQuery(row.doctorId);
-
+  const { data = {}, isLoading } = useGetDoctorByIdQuery(row.doctorId);
+  console.log('data: ', data);
   if (isLoading) return <p>Загрузка...</p>;
-  if (true) return <p>цуаауа</p>;
+
   return (
     <>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -36,10 +36,10 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.doctorName}
+          {data[0].lastName} {data[0].firstName}
         </TableCell>
-        <TableCell align="left">{row.doctorSpec}</TableCell>
-        <TableCell align="left">{row.date}</TableCell>
+        <TableCell align="left">{SPECIALIZATIONS[data[0].bodyPart]}</TableCell>
+        <TableCell align="left">{moment(row.date).format('DD.MM.YYYY')}</TableCell>
         <TableCell align="left">{TIME_PERIOD[row.timeSlot]}</TableCell>
       </TableRow>
       <TableRow>
@@ -93,7 +93,7 @@ function Row(props) {
 
 export default function AppointmentsTable() {
   const userInfo = useSelector((state) => state.auth.userInfo);
-  const { rows = [], isLoading } = useGetPatientScheduleQuery(userInfo.email);
+  const { data = [], isLoading } = useGetPatientScheduleQuery(userInfo.email);
   if (isLoading) return <p>Загрузка...</p>;
   return (
     <TableContainer component={Paper}>
@@ -108,10 +108,9 @@ export default function AppointmentsTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {/* Тимофей хэлп */}
-          {/* {rows.map((row) => ( */}
-          {/*  <div>sfwefefgwegwegwegwegew</div> */}
-          {/* )} */}
+          {data.map((row) => (
+            <Row row={row} />
+          ))}
         </TableBody>
       </Table>
     </TableContainer>
