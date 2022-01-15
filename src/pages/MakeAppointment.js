@@ -8,7 +8,7 @@ import {
   TextField,
   Typography
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { DateTimePicker, LoadingButton } from '@mui/lab';
@@ -131,7 +131,7 @@ export default function MakeAppointment() {
                       helperText={touched.doctorId && errors.doctorId}
                     >
                       {data.map((item) => (
-                        <MenuItem key={item.id} value={item}>
+                        <MenuItem key={item.id} value={item.id}>
                           {item.lastName} {item.firstName} ({SPECIALIZATIONS[item.bodyPart]})
                         </MenuItem>
                       ))}
