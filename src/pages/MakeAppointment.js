@@ -131,7 +131,7 @@ export default function MakeAppointment() {
                       helperText={touched.doctorId && errors.doctorId}
                     >
                       {data.map((item) => (
-                        <MenuItem key={item.id} value={item}>
+                        <MenuItem key={item.id} value={item.id}>
                           {item.lastName} {item.firstName} ({SPECIALIZATIONS[item.bodyPart]})
                         </MenuItem>
                       ))}
