@@ -11,7 +11,7 @@ export const medbookAPI = createApi({
       query: (doctorId = '') =>
         `/appointment?_sort=date,timeSlot&_order=asc,asc${doctorId && `doctorId=${doctorId}`}`
     }),
-    getPatientSchedule: build.query({
+    getPatientSchedule: build.mutation({
       query: (patientId = '') => `/appointment?${patientId && `patientId=${patientId}`}`
     }),
     makeAppointment: build.mutation({
@@ -58,7 +58,7 @@ export const {
   useLoginMutation,
   useMakeAppointmentMutation,
   useGetDoctorScheduleQuery,
-  useGetPatientScheduleQuery,
+  useGetPatientScheduleMutation,
   useEditUserMutation,
   useMarkAppointmentMutation
 } = medbookAPI;

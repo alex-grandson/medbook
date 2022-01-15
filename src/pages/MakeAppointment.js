@@ -56,7 +56,20 @@ export default function MakeAppointment() {
   const handleMakeAppointment = async () => {
     if (!formik || !formik.isValid) return null;
     try {
-      await makeAppointment(formik.values);
+      const appointmentInfo = {
+        ...formik.values,
+        complaints: '',
+        objectively: '',
+        temp: '',
+        pulse: '',
+        blood_pressure: '',
+        diagnosis: '',
+        application: '',
+        receipt: '',
+        accepted: true
+      };
+
+      await makeAppointment(appointmentInfo);
       setShowDialog(true);
     } catch (e) {
       console.error('Не удалось записаться на прием ', e);

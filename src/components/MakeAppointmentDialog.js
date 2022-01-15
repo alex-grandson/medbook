@@ -11,9 +11,9 @@ import { useNavigate } from 'react-router-dom';
 
 const MakeAppointmentDialog = ({ onClose, onShow }) => {
   const navigate = useNavigate();
-  const handleTransitionToMain = () => {
+  const handleTransitionToSchedule = () => {
     onClose();
-    navigate('/dashboard', { replace: true });
+    navigate('/dashboard/appointments', { replace: true });
   };
 
   return (
@@ -27,13 +27,13 @@ const MakeAppointmentDialog = ({ onClose, onShow }) => {
 
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          Вы можете перейти на главную страницу либо остаться на текущей странице для офомления еще
+          Вы можете перейти к вашим записям либо остаться на текущей странице для офомления еще
           одной записи
         </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Остаться</Button>
-        <Button onClick={handleTransitionToMain} autoFocus>
+        <Button onClick={handleTransitionToSchedule} autoFocus>
           Перейти
         </Button>
       </DialogActions>

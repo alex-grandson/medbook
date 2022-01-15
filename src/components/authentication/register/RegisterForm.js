@@ -68,10 +68,10 @@ export default function RegisterForm() {
         password: hashPassword
       };
 
-      await register(userInfoToSend).unwrap();
+      const userInfoFromServer = await register(userInfoToSend).unwrap();
 
       const userInfo = {
-        ...formik.values,
+        ...userInfoFromServer,
         role: formik.values.isDoctor ? ROLES.DOCTOR : ROLES.PATIENT
       };
 
@@ -166,16 +166,19 @@ export default function RegisterForm() {
               label="Я врач"
             />
           </Stack>
-          <FormControl>
-            <InputLabel id="test-select-label">Специализация</InputLabel>
-            <Select {...getFieldProps('bodyPart')} label="Специализация">
-              {Object.keys(ORGANS_DEFAULT).map((organName) => (
-                <MenuItem key={organName} value={organName}>
-                  {SPECIALIZATIONS[organName]}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+
+          {showSpecialization && (
+            <FormControl>
+              <InputLabel id="test-select-label">Специализация</InputLabel>
+              <Select {...getFieldProps('bodyPart')} label="Специализация">
+                {Object.keys(ORGANS_DEFAULT).map((organName) => (
+                  <MenuItem key={organName} value={organName}>
+                    {SPECIALIZATIONS[organName]}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
 
           <LoadingButton
             fullWidth

@@ -20,15 +20,24 @@ export default function BodyPart({ imageName, onClick, isChecked, key }) {
 
 const styles = {
   checked: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     transform: 'scale(1.1)',
     padding: '15px'
   },
   unchecked: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     cursor: 'pointer',
     opacity: 0.5,
     padding: '15px'
   },
   default: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     cursor: 'pointer',
     padding: '15px'
   }
