@@ -19,10 +19,7 @@ export default function DoctorSchedule() {
       return rv;
     }, {});
   };
-
   const days = groupBy(data, 'date');
-  console.log('days', days);
-
   return (
     <Page title="Расписание приема | Medbook">
       {Object.keys(days).map((day) => (
