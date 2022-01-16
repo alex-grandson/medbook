@@ -19,6 +19,7 @@ import { useSelector } from 'react-redux';
 import * as moment from 'moment';
 import { SPECIALIZATIONS, TIME_PERIOD } from './constants';
 import { useGetDoctorByEmailQuery, useGetPatientScheduleMutation } from './redux/medbookAPI';
+import { makeAppointmentPDF } from './utils/pdf';
 
 function Row(props) {
   const { row } = props;
@@ -26,6 +27,21 @@ function Row(props) {
   const { data = {}, isLoading } = useGetDoctorByEmailQuery(row.doctorId);
 
   if (isLoading) return <p>Загрузка...</p>;
+
+  const infoForPDF = {
+    doctorData: data[0],
+    appointmentData: row
+  };
+
+  const { appointmentsInfo, setAppointmentsInfo } = props;
+
+  const infoAboutThisAppointment = appointmentsInfo.find(
+    (info) => info.appointmentData.id === row.id
+  );
+
+  if (!infoAboutThisAppointment) setAppointmentsInfo((prevState) => [...prevState, infoForPDF]);
+
+  const doctorSpecializationName = SPECIALIZATIONS[data[0]?.bodyPart];
 
   return (
     <>
@@ -38,7 +54,7 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {data[0]?.lastName} {data[0]?.firstName}
         </TableCell>
-        <TableCell align="left">{SPECIALIZATIONS[data[0]?.bodyPart]}</TableCell>
+        <TableCell align="left">{doctorSpecializationName}</TableCell>
         <TableCell align="left">{moment(row.date).format('DD.MM.YYYY')}</TableCell>
         <TableCell align="left">{TIME_PERIOD[row.timeSlot]}</TableCell>
       </TableRow>
@@ -50,7 +66,8 @@ function Row(props) {
                 Визит №{row.id}
               </Typography>
               <Typography variant="h6" gutterBottom component="div">
-                Протокол приема врача (Офтальмолог)
+                Протокол приема врача {data[0]?.lastName} {data[0]?.firstName} (
+                {doctorSpecializationName})
               </Typography>
               <Typography style={{ marginBottom: '20px' }} variant="p" gutterBottom component="div">
                 <b>Прием:</b> {row.date}
@@ -80,7 +97,11 @@ function Row(props) {
                 <b>Рекомендации:</b> {row.receipt}
               </Typography>
 
-              <Button style={{ marginBottom: 20 }} variant="contained">
+              <Button
+                onClick={() => makeAppointmentPDF(infoForPDF)}
+                style={{ marginBottom: 20 }}
+                variant="contained"
+              >
                 Скачать PDF
               </Button>
             </Box>
@@ -91,7 +112,7 @@ function Row(props) {
   );
 }
 
-export default function AppointmentsTable() {
+export default function AppointmentsTable({ appointmentsInfo, setAppointmentsInfo }) {
   const userInfo = useSelector((state) => state.auth.userInfo);
 
   const [getPatientSchedule] = useGetPatientScheduleMutation();
@@ -106,7 +127,6 @@ export default function AppointmentsTable() {
       const response = await getPatientSchedule(userInfo.email);
       setData(response.data);
       setIsLoading(false);
-      console.log('data: ', data);
     };
     handleGetInfoFromServer();
   }, [userInfo, getPatientSchedule]);
@@ -126,8 +146,13 @@ export default function AppointmentsTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data?.map((row) => (
-            <Row row={row} />
+          {data?.map((row, idx) => (
+            <Row
+              key={idx}
+              row={row}
+              appointmentsInfo={appointmentsInfo}
+              setAppointmentsInfo={setAppointmentsInfo}
+            />
           ))}
         </TableBody>
       </Table>
