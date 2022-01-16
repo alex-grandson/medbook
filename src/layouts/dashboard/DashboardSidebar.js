@@ -13,6 +13,8 @@ import { MHidden } from '../../components/@material-extend';
 //
 import sidebarConfig from './SidebarConfig';
 
+import { ROLES, SPECIALIZATIONS } from '../../constants';
+
 // ----------------------------------------------------------------------
 
 const DRAWER_WIDTH = 280;
@@ -73,7 +75,9 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
                 {account?.firstName} {account?.lastName}
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {account?.role}
+                {account?.role === ROLES.DOCTOR
+                  ? `Доктор (${SPECIALIZATIONS[account.bodyPart]})`
+                  : 'Пациент'}
               </Typography>
             </Box>
           </AccountStyle>

@@ -76,7 +76,7 @@ export default function RegisterForm() {
       };
 
       dispatch(loginAction({ info: userInfo }));
-      navigate('/dashboard', { replace: true });
+      navigate('/dashboard/app', { replace: true });
     } catch (e) {
       console.error('Не удалось создать пользователя ', e);
     }

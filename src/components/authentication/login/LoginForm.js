@@ -48,7 +48,8 @@ export default function LoginForm() {
       }).unwrap();
 
       dispatch(loginAction({ info: userInfo }));
-      navigate('/dashboard', { replace: true });
+
+      navigate('/dashboard/app', { replace: true });
     } catch (e) {
       console.error('Не удалось войти в систему ', e);
     }

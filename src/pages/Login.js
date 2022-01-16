@@ -65,7 +65,7 @@ export default function Login() {
               Вход
             </Typography>
             <Typography sx={{ color: 'text.secondary' }}>
-              Введите данные для входа в аккаунт.
+              Введите данные для входа в аккаунт
             </Typography>
           </Stack>
           <AuthSocial />

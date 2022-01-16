@@ -11,7 +11,7 @@ export const medbookAPI = createApi({
     }),
     getDoctorSchedule: build.query({
       query: (doctorId = '') =>
-        `/appointment?_sort=date,timeSlot&_order=asc,asc${doctorId && `doctorId=${doctorId}`}`
+        `/appointment?_sort=date,timeSlot&_order=asc,asc&${doctorId && `doctorId=${doctorId}`}`
     }),
     getPatientSchedule: build.mutation({
       query: (patientId = '') => `/appointment?${patientId && `patientId=${patientId}`}`
@@ -48,7 +48,7 @@ export const medbookAPI = createApi({
     }),
     getTodayAppointments: build.query({
       query: (login = '') =>
-        `appointment?${login && `email=${login}`}&${`date=${format(new Date(), 'yyyy-MM-dd')}`}`
+        `appointment?${login && `patientId=${login}`}&${`date=${format(new Date(), 'yyyy-MM-dd')}`}`
     })
     // markAppointment: build.mutation({
     //   query: (body = {}) => ({ url: '/markAppointment', method: 'POST', body })
