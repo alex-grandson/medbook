@@ -152,7 +152,7 @@ export default function MakeAppointment() {
                     <Stack direction="row">
                       <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
-                          renderInput={(props) => <TextField {...props} />}
+                          renderInput={(props) => <TextField style={{ flex: 1 }} {...props} />}
                           label="Дата приема"
                           value={formik.values.date}
                           onChange={(newValue) => setFieldValue('date', newValue)}
@@ -160,7 +160,7 @@ export default function MakeAppointment() {
                           helperText={touched.date && errors.date}
                         />
                       </LocalizationProvider>
-                      <Select {...getFieldProps('timeSlot')}>
+                      <Select {...getFieldProps('timeSlot')} style={{ marginLeft: '16px' }}>
                         {Object.keys(TIME_PERIOD).map((timeSlot) => (
                           <MenuItem key={timeSlot} value={timeSlot}>
                             {TIME_PERIOD[timeSlot]}

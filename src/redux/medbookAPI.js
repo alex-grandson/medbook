@@ -23,8 +23,8 @@ export const medbookAPI = createApi({
         return { url: `/appointment/${id}`, method: 'PUT', body: { ...body } };
       }
     }),
-    getDoctorById: build.query({
-      query: (id = '') => `user?isDoctor=true&${id && `id=${id}`}`
+    getDoctorByEmail: build.query({
+      query: (email = '') => `user?isDoctor=true&${email && `email=${email}`}`
     }),
     getUsers: build.query({
       query: (login = '') => `user?_limit=1&${login && `email=${login}`}`
@@ -52,7 +52,7 @@ export const medbookAPI = createApi({
 
 export const {
   useGetDoctorQuery,
-  useGetDoctorByIdQuery,
+  useGetDoctorByEmailQuery,
   useGetUsersQuery,
   useRegistrationMutation,
   useLoginMutation,

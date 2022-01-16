@@ -18,13 +18,13 @@ import { Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 import * as moment from 'moment';
 import { SPECIALIZATIONS, TIME_PERIOD } from './constants';
-import { useGetDoctorByIdQuery, useGetPatientScheduleMutation } from './redux/medbookAPI';
+import { useGetDoctorByEmailQuery, useGetPatientScheduleMutation } from './redux/medbookAPI';
 
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = useState(false);
-  const { data = {}, isLoading } = useGetDoctorByIdQuery(row.doctorId);
-  console.log('data: ', data);
+  const { data = {}, isLoading } = useGetDoctorByEmailQuery(row.doctorId);
+
   if (isLoading) return <p>Загрузка...</p>;
 
   return (
@@ -36,9 +36,9 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {data[0].lastName} {data[0].firstName}
+          {data[0]?.lastName} {data[0]?.firstName}
         </TableCell>
-        <TableCell align="left">{SPECIALIZATIONS[data[0].bodyPart]}</TableCell>
+        <TableCell align="left">{SPECIALIZATIONS[data[0]?.bodyPart]}</TableCell>
         <TableCell align="left">{moment(row.date).format('DD.MM.YYYY')}</TableCell>
         <TableCell align="left">{TIME_PERIOD[row.timeSlot]}</TableCell>
       </TableRow>
@@ -102,11 +102,14 @@ export default function AppointmentsTable() {
 
   React.useEffect(() => {
     const handleGetInfoFromServer = async () => {
+      setIsLoading(true);
       const response = await getPatientSchedule(userInfo.email);
       setData(response.data);
+      setIsLoading(false);
+      console.log('data: ', data);
     };
     handleGetInfoFromServer();
-  }, [isLoading, userInfo, getPatientSchedule]);
+  }, [userInfo, getPatientSchedule]);
 
   if (isLoading) return <p>Загрузка...</p>;
 
