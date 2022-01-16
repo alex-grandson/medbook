@@ -1,7 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { format } from 'date-fns';
-
 export const medbookAPI = createApi({
   reducerPath: 'medbookAPI',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001/' }),
@@ -21,9 +19,7 @@ export const medbookAPI = createApi({
     }),
     markAppointment: build.mutation({
       query: (body = {}) => {
-        console.log('body ', body);
         const { id } = body;
-
         return { url: `/appointment/${id}`, method: 'PUT', body: { ...body } };
       }
     }),
@@ -52,9 +48,6 @@ export const medbookAPI = createApi({
       query: (login = '') =>
         `appointment?${login && `patientId=${login}`}&${`date=${format(new Date(), 'yyyy-MM-dd')}`}`
     })
-    // markAppointment: build.mutation({
-    //   query: (body = {}) => ({ url: '/markAppointment', method: 'PUT', body })
-    // })
   })
 });
 

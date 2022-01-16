@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Divider, Stack, Typography } from '@mui/material';
 import { TIME_PERIOD } from '../../constants';
-import MarkAppointmentDialog from './MarkAppointmentDialog';
 import { useGetUsersQuery } from '../../redux/medbookAPI';
 
 export default function AppointmentEvent(props) {
@@ -18,9 +17,6 @@ export default function AppointmentEvent(props) {
   const [showModal, setShowModal] = React.useState(false);
 
   if (isLoading) return <p>Загрузка...</p>;
-
-  console.log('slottt ', slot);
-
   return (
     <>
       {showModal && (
