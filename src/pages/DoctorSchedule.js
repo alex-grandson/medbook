@@ -20,7 +20,10 @@ export default function DoctorSchedule() {
       return rv;
     }, {});
   };
+
   const days = groupBy(data, 'date');
+  console.log('days', days);
+
   return (
     <Page title="Расписание приема | Medbook">
       <Container>
@@ -32,7 +35,12 @@ export default function DoctorSchedule() {
         )}
       </Container>
       {Object.keys(days).map((day) => (
-        <WeekDayCard day={days[day]} onShow={setShowModal} setSelectedUser={setSelectedUser} />
+        <WeekDayCard
+          key={day}
+          day={days[day]}
+          onShow={setShowModal}
+          setSelectedUser={setSelectedUser}
+        />
       ))}
     </Page>
   );

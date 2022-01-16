@@ -18,13 +18,13 @@ import { Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 import * as moment from 'moment';
 import { SPECIALIZATIONS, TIME_PERIOD } from './constants';
-import { useGetDoctorByIdQuery, useGetPatientScheduleQuery } from './redux/medbookAPI';
+import { useGetDoctorByEmailQuery, useGetPatientScheduleMutation } from './redux/medbookAPI';
 
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = useState(false);
-  const { data = {}, isLoading } = useGetDoctorByIdQuery(row.doctorId);
-  console.log('data: ', data);
+  const { data = {}, isLoading } = useGetDoctorByEmailQuery(row.doctorId);
+
   if (isLoading) return <p>Загрузка...</p>;
 
   return (
@@ -36,16 +36,16 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {data[0].lastName} {data[0].firstName}
+          {data[0]?.lastName} {data[0]?.firstName}
         </TableCell>
-        <TableCell align="left">{SPECIALIZATIONS[data[0].bodyPart]}</TableCell>
+        <TableCell align="left">{SPECIALIZATIONS[data[0]?.bodyPart]}</TableCell>
         <TableCell align="left">{moment(row.date).format('DD.MM.YYYY')}</TableCell>
         <TableCell align="left">{TIME_PERIOD[row.timeSlot]}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ marginLeft: 5, background: '#FFF' }}>
+            <Box sx={{ marginLeft: 5, background: '#FFF', marginTop: '16px' }}>
               <Typography variant="h5" gutterBottom component="div">
                 Визит №{row.id}
               </Typography>
@@ -93,8 +93,26 @@ function Row(props) {
 
 export default function AppointmentsTable() {
   const userInfo = useSelector((state) => state.auth.userInfo);
-  const { data = [], isLoading } = useGetPatientScheduleQuery(userInfo.email);
+
+  const [getPatientSchedule] = useGetPatientScheduleMutation();
+
+  const [data, setData] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  React.useEffect(() => {
+    const handleGetInfoFromServer = async () => {
+      setIsLoading(true);
+      const response = await getPatientSchedule(userInfo.email);
+      setData(response.data);
+      setIsLoading(false);
+      console.log('data: ', data);
+    };
+    handleGetInfoFromServer();
+  }, [userInfo, getPatientSchedule]);
+
   if (isLoading) return <p>Загрузка...</p>;
+
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -108,7 +126,7 @@ export default function AppointmentsTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row) => (
+          {data?.map((row) => (
             <Row row={row} />
           ))}
         </TableBody>

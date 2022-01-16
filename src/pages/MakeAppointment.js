@@ -11,7 +11,7 @@ import {
 import { useState } from 'react';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import { DateTimePicker, LoadingButton } from '@mui/lab';
+import { DatePicker, DateTimePicker, LoadingButton } from '@mui/lab';
 import { Form, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
 import * as moment from 'moment';
@@ -19,7 +19,7 @@ import { useSelector } from 'react-redux';
 import { useGetDoctorQuery, useMakeAppointmentMutation } from '../redux/medbookAPI';
 import BodyPart from '../components/BodyPart';
 import MakeAppointmentDialog from '../components/MakeAppointmentDialog';
-import { ORGANS_DEFAULT, SPECIALIZATIONS } from '../constants';
+import { ORGANS_DEFAULT, SPECIALIZATIONS, TIME_PERIOD } from '../constants';
 
 const ORGANS_NAMES = [...Object.keys(ORGANS_DEFAULT)];
 
@@ -56,7 +56,20 @@ export default function MakeAppointment() {
   const handleMakeAppointment = async () => {
     if (!formik || !formik.isValid) return null;
     try {
-      await makeAppointment(formik.values);
+      const appointmentInfo = {
+        ...formik.values,
+        complaints: '',
+        objectively: '',
+        temp: '',
+        pulse: '',
+        blood_pressure: '',
+        diagnosis: '',
+        application: '',
+        receipt: '',
+        accepted: true
+      };
+
+      await makeAppointment(appointmentInfo);
       setShowDialog(true);
     } catch (e) {
       console.error('Не удалось записаться на прием ', e);
@@ -131,22 +144,30 @@ export default function MakeAppointment() {
                       helperText={touched.doctorId && errors.doctorId}
                     >
                       {data.map((item) => (
-                        <MenuItem key={item.id} value={item}>
+                        <MenuItem key={item.id} value={item.email}>
                           {item.lastName} {item.firstName} ({SPECIALIZATIONS[item.bodyPart]})
                         </MenuItem>
                       ))}
                     </Select>
-
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <DateTimePicker
-                        renderInput={(props) => <TextField {...props} />}
-                        label="Время приема"
-                        value={formik.values.date}
-                        onChange={(newValue) => setFieldValue('date', newValue)}
-                        error={Boolean(touched.date && errors.date)}
-                        helperText={touched.date && errors.date}
-                      />
-                    </LocalizationProvider>
+                    <Stack direction="row">
+                      <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DatePicker
+                          renderInput={(props) => <TextField style={{ flex: 1 }} {...props} />}
+                          label="Дата приема"
+                          value={formik.values.date}
+                          onChange={(newValue) => setFieldValue('date', newValue)}
+                          error={Boolean(touched.date && errors.date)}
+                          helperText={touched.date && errors.date}
+                        />
+                      </LocalizationProvider>
+                      <Select {...getFieldProps('timeSlot')} style={{ marginLeft: '16px' }}>
+                        {Object.keys(TIME_PERIOD).map((timeSlot) => (
+                          <MenuItem key={timeSlot} value={timeSlot}>
+                            {TIME_PERIOD[timeSlot]}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </Stack>
                   </Stack>
 
                   <Stack
