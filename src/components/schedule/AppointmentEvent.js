@@ -22,14 +22,14 @@ export default function AppointmentEvent(props) {
         <Stack direction="column" style={{ textAlign: 'center', opacity: 0.75, marginRight: 15 }}>
           <Typography variant="p">{TIME_PERIOD[slot.timeSlot]}</Typography>
           <div style={{ margin: '-7px 0' }}>-</div>
-          <Typography variant="p">{TIME_PERIOD[slot.timeSlot + 1]}</Typography>
+          <Typography variant="p">{TIME_PERIOD[slot.timeSlot - -1]}</Typography>
         </Stack>
         <Stack direction="column" sx={customStackStyles}>
           <div>
             <Typography variant="h6">
               {data[0].lastName} {data[0].firstName}
             </Typography>
-            <Typography variant="p">{slot.comment}</Typography>
+            <Typography variant="p">{slot.comment ? slot.comment : 'Комментарий'}</Typography>
           </div>
 
           {/* <Button */}

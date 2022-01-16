@@ -22,6 +22,7 @@ export default function DoctorSchedule() {
   };
 
   const days = groupBy(data, 'date');
+  console.log('days', days);
 
   return (
     <Page title="Расписание приема | Medbook">
