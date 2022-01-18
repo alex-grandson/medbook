@@ -65,7 +65,7 @@ export default function Register() {
               Зарегистрируйтесь
             </Typography>
             <Typography sx={{ color: 'text.secondary' }}>
-              Или войдите с помощью аккаунтагос услуг
+              Или войдите с помощью аккаунта госуслуг
             </Typography>
           </Box>
 

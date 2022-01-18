@@ -18,7 +18,7 @@ import { useMarkAppointmentMutation } from '../../redux/medbookAPI';
 import { OBJECTIVELY, COMPLAINTS, DIAGNOSIS, RECEIPT } from '../../constants';
 import 'moment/locale/ru';
 
-export default function MarkAppointmentDialog({ onClose, onShow }) {
+export default function MarkAppointmentDialog({ onClose, onShow, id }) {
   const [markAppointment] = useMarkAppointmentMutation();
   const userInfo = useSelector((state) => state.auth.userInfo);
   const dispatch = useDispatch();
@@ -26,7 +26,8 @@ export default function MarkAppointmentDialog({ onClose, onShow }) {
   const handleMarkAppointment = async () => {
     if (!formik || !formik.isValid) return null;
     try {
-      const { data: userInfo } = await markAppointment(formik.values);
+      console.log('formik.values ', formik.values);
+      const { data: userInfo } = await markAppointment({ ...formik.values, id });
       // dispatch(setPropertiesAction({ newUserInfo: userInfo }));
       onClose();
     } catch (e) {

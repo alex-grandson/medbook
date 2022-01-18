@@ -9,9 +9,9 @@ export const medbookAPI = createApi({
     }),
     getDoctorSchedule: build.query({
       query: (doctorId = '') =>
-        `/appointment?_sort=date,timeSlot&_order=asc,asc${doctorId && `doctorId=${doctorId}`}`
+        `/appointment?${doctorId && `doctorId=${doctorId}&_sort=date,timeSlot&_order=asc,asc&`}`
     }),
-    getPatientSchedule: build.query({
+    getPatientSchedule: build.mutation({
       query: (patientId = '') => `/appointment?${patientId && `patientId=${patientId}`}`
     }),
     makeAppointment: build.mutation({
@@ -23,8 +23,8 @@ export const medbookAPI = createApi({
         return { url: `/appointment/${id}`, method: 'PUT', body: { ...body } };
       }
     }),
-    getDoctorById: build.query({
-      query: (id = '') => `user?isDoctor=true&${id && `id=${id}`}`
+    getDoctorByEmail: build.query({
+      query: (email = '') => `user?isDoctor=true&${email && `email=${email}`}`
     }),
     getUsers: build.query({
       query: (login = '') => `user?_limit=1&${login && `email=${login}`}`
@@ -43,22 +43,24 @@ export const medbookAPI = createApi({
         const { id } = body;
         return { url: `/user/${id}`, method: 'PUT', body: { ...body } };
       }
+    }),
+    getTodayAppointments: build.query({
+      query: (login = '') =>
+        `appointment?${login && `patientId=${login}`}&${`date=${format(new Date(), 'yyyy-MM-dd')}`}`
     })
-    // markAppointment: build.mutation({
-    //   query: (body = {}) => ({ url: '/markAppointment', method: 'POST', body })
-    // })
   })
 });
 
 export const {
   useGetDoctorQuery,
-  useGetDoctorByIdQuery,
+  useGetDoctorByEmailQuery,
   useGetUsersQuery,
   useRegistrationMutation,
   useLoginMutation,
   useMakeAppointmentMutation,
   useGetDoctorScheduleQuery,
-  useGetPatientScheduleQuery,
+  useGetPatientScheduleMutation,
   useEditUserMutation,
-  useMarkAppointmentMutation
+  useMarkAppointmentMutation,
+  useGetTodayAppointmentsQuery
 } = medbookAPI;

@@ -5,8 +5,8 @@ import 'moment/locale/ru';
 import AppointmentEvent from './AppointmentEvent';
 
 export default function WeekDayCard(props) {
-  const { day, onShow, setSelectedUser } = props;
-  console.log(day);
+  const { day, setSelectedUser } = props;
+  const { date } = day && day[0];
   return (
     <Card style={{ padding: 30, marginBottom: 30 }}>
       <Stack
@@ -17,14 +17,14 @@ export default function WeekDayCard(props) {
         alignContent="center"
       >
         <Typography variant="h4" gutterBottom style={{ textTransform: 'capitalize' }}>
-          {moment(day.date).format('dddd')}
+          {moment(date).format('dddd')}
         </Typography>
         <Typography variant="p" style={{ textTransform: 'uppercase' }}>
-          {moment(day.date).format('DD.MM')}
+          {moment(date).format('DD.MM')}
         </Typography>
       </Stack>
-      {day.map((slot) => (
-        <AppointmentEvent slot={slot} onShow={onShow} setSelectedUser={setSelectedUser} />
+      {day?.map((slot, idx) => (
+        <AppointmentEvent key={idx} slot={slot} setSelectedUser={setSelectedUser} />
       ))}
     </Card>
   );

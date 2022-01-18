@@ -79,7 +79,7 @@
       "patientId": "qw@qq.qq",
       "timeSlot": 1,
       "date": "2022-01-11",
-      "comment": "",
+      "comment": "все крута!",
       "complaints": "",
       "objectively": "Состояние удовлетворительное",
       "temp": "36.7",
@@ -88,8 +88,41 @@
       "diagnosis": "ОРВИ",
       "application": "Кожные покровы и видимые слизистые без изменений, носовое дыхание свободное. Язык влажный, чистый. В легких везикулярное дыхание, хрипоты нет. Тоны сердца ритмичные, живой без болезненный",
       "receipt": "полоскание, мытье.",
+      "accepted": true
+    },
+    {
+      "comment": "ghbdtn",
+      "doctorId": "qq@qq.qq",
+      "patientId": "qw@qq.qq",
+      "date": "2022-01-16",
+      "timeSlot": "17",
       "accepted": true,
-      "comment": "все крута!"
+      "complaints": "",
+      "objectively": "",
+      "temp": "",
+      "pulse": "",
+      "blood_pressure": "",
+      "diagnosis": "",
+      "application": "",
+      "receipt": "",
+      "id": 6
+    },
+    {
+      "comment": "пошщцщцткптцк",
+      "doctorId": "qq@qq.qq",
+      "patientId": "qw@qq.qq",
+      "date": "2022-01-16",
+      "timeSlot": "15",
+      "accepted": true,
+      "complaints": "",
+      "objectively": "",
+      "temp": "",
+      "pulse": "",
+      "blood_pressure": "",
+      "diagnosis": "",
+      "application": "",
+      "receipt": "",
+      "id": 7
     }
   ]
 }

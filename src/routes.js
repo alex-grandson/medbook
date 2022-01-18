@@ -35,14 +35,14 @@ export default function Router() {
         },
         {
           path: 'schedule',
-          element: isDoctor ? <DoctorSchedule /> : <Navigate to="/dashboard" />
+          element: isDoctor ? <DoctorSchedule /> : <Navigate to="/dashboard/app" />
         },
         { path: 'appointments', element: <PatientSchedule /> },
         { path: 'appointment', element: <MakeAppointment /> },
-        { path: 'profile', element: !isDoctor ? <Profile /> : <Navigate to="/dashboard" /> },
+        { path: 'profile', element: !isDoctor ? <Profile /> : <Navigate to="/dashboard/app" /> },
         {
           path: 'doctor',
-          element: isDoctor ? <DoctorProfile /> : <Navigate to="/dashboard" />
+          element: isDoctor ? <DoctorProfile /> : <Navigate to="/dashboard/app" />
         }
       ]
     },
@@ -59,7 +59,7 @@ export default function Router() {
           element: !isAuthenticated ? <Register /> : <Navigate to="/dashboard" />
         },
         { path: '404', element: <NotFound /> },
-        { path: '/', element: <Navigate to="/dashboard" /> },
+        { path: '/', element: <Navigate to="/dashboard/app" /> },
         { path: '*', element: <Navigate to="/404" /> }
       ]
     },

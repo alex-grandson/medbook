@@ -28,7 +28,6 @@ const EditUserDialog = ({ onClose, onShow }) => {
     if (!formik || !formik.isValid) return null;
     try {
       const updatedUserInfo = { ...oldUserInfo, ...formik.values };
-      console.log('updatedUserInfo ', updatedUserInfo);
       const { data: userInfo } = await editUser(updatedUserInfo);
       dispatch(setPropertiesAction({ newUserInfo: userInfo }));
       onClose();
