@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Divider, Stack, Typography } from '@mui/material';
 import { TIME_PERIOD } from '../../constants';
 import { useGetUsersQuery } from '../../redux/medbookAPI';
+import MarkAppointmentDialog from './MarkAppointmentDialog';
 
 export default function AppointmentEvent(props) {
   const { slot, setSelectedUser } = props;
