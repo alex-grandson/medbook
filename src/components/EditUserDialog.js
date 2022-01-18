@@ -11,11 +11,34 @@ import {
   TextField,
   Stack
 } from '@mui/material';
+import * as Yup from 'yup';
 
 import { setProperties as setPropertiesAction } from '../redux/authSlice';
 import { useEditUserMutation } from '../redux/medbookAPI';
 
 const EditUserDialog = ({ onClose, onShow }) => {
+  const EditUserSchema = Yup.object().shape({
+    firstName: Yup.string()
+      .min(2, 'Слишком коротко!')
+      .max(50, 'Очень длинно!')
+      .required('Имя: Обязательное поле'),
+    lastName: Yup.string()
+      .min(2, 'Слишком коротко!')
+      .max(50, 'Слишком длинно!')
+      .required('Фамилия: Обязательное поле'),
+    email: Yup.string().email('Проверьте корректность почты').required('Почта: Обязательное поле'),
+    password: Yup.string().required('Пароль: Обязательное поле'),
+    birthDate: Yup.date()
+      .min(new Date('01.01.1900'), 'Введите корректную дату!')
+      .max(new Date(), 'Введите корректную дату')
+      .required('Дата рождения: Обязательное поле'),
+    isDoctor: Yup.boolean(),
+    bodyPart: Yup.string().when('isDoctor', {
+      is: true,
+      then: Yup.string().required('Для врача необходимо ввести специализацию')
+    })
+  });
+
   const userInfo = useSelector((state) => state.auth.userInfo);
 
   const [editUser] = useEditUserMutation();
@@ -43,6 +66,7 @@ const EditUserDialog = ({ onClose, onShow }) => {
       email: userInfo.email,
       birthDate: userInfo.birthDate
     },
+    validationSchema: EditUserSchema,
     onSubmit: handleEditUser
   });
 
