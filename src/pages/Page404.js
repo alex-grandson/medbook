@@ -34,7 +34,7 @@ export default function Page404() {
               Упс! Что-то пошло не так. Не можем найти такую страницу
             </Typography>
 
-            <Button to="/" size="large" variant="contained" component={RouterLink}>
+            <Button to="/dashboard/app" size="large" variant="contained" component={RouterLink}>
               На главную
             </Button>
           </Box>
