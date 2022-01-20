@@ -16,7 +16,11 @@ import { Form, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
 import * as moment from 'moment';
 import { useSelector } from 'react-redux';
-import { useGetDoctorQuery, useMakeAppointmentMutation } from '../redux/medbookAPI';
+import {
+  useGetDoctorQuery,
+  useGetDoctorScheduleQuery,
+  useMakeAppointmentMutation
+} from '../redux/medbookAPI';
 import BodyPart from '../components/BodyPart';
 import MakeAppointmentDialog from '../components/MakeAppointmentDialog';
 import { ORGANS_DEFAULT, SPECIALIZATIONS, TIME_PERIOD } from '../constants';
@@ -27,11 +31,12 @@ export default function MakeAppointment() {
   const [organs, setOrgans] = useState({ ...ORGANS_DEFAULT });
   const [selectedOrgan, setSelectedOrgan] = useState('');
   const { data = [], isLoading } = useGetDoctorQuery(selectedOrgan);
-
+  const [usedSlots, setUsedSlots] = useState([]);
   const MakeAppointmentSchema = Yup.object().shape({
     comment: Yup.string(),
     doctorId: Yup.string().required('Выберите одного из доступных врачей'),
-    date: Yup.string()
+    date: Yup.string(),
+    timeSlot: Yup.number()
   });
 
   const onBodyPartClick = (e, bodyPart) => {
@@ -155,6 +160,8 @@ export default function MakeAppointment() {
                           renderInput={(props) => <TextField style={{ flex: 1 }} {...props} />}
                           label="Дата приема"
                           value={formik.values.date}
+                          minDate={new Date()}
+                          maxDate={new Date(new Date().getFullYear(), 11, 31)}
                           onChange={(newValue) => setFieldValue('date', newValue)}
                           error={Boolean(touched.date && errors.date)}
                           helperText={touched.date && errors.date}
@@ -162,7 +169,11 @@ export default function MakeAppointment() {
                       </LocalizationProvider>
                       <Select {...getFieldProps('timeSlot')} style={{ marginLeft: '16px' }}>
                         {Object.keys(TIME_PERIOD).map((timeSlot) => (
-                          <MenuItem key={timeSlot} value={timeSlot}>
+                          <MenuItem
+                            key={timeSlot}
+                            value={timeSlot}
+                            disabled={timeSlot in usedSlots}
+                          >
                             {TIME_PERIOD[timeSlot]}
                           </MenuItem>
                         ))}
