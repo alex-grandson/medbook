@@ -116,6 +116,7 @@ const EditUserDialog = ({ onClose, onShow }) => {
               sx={{ marginTop: '16px' }}
             />
             <TextField
+              disabled
               fullWidth
               autoComplete="birth-date"
               type="date"
