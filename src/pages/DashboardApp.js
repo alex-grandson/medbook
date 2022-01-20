@@ -29,7 +29,7 @@ export default function DashboardApp() {
           <Typography variant="h4">Добро пожаловать, {user.firstName}! </Typography>
         </Box>
         {user.isDoctor ? (
-          <Typography variant="text" color="gray">
+          <Typography variant="text" color="black">
             {todayAppointments?.length
               ? `Сегодня у вас есть пациенты в ${humanizeTodayAppointments(
                   todayAppointments
@@ -37,7 +37,7 @@ export default function DashboardApp() {
               : 'Пациенты на сегодняшний день у вас отсутствуют. Сверьтесь с вашим графиком в вкладке "Расписание", чтобы спланировать прием пациентов'}
           </Typography>
         ) : (
-          <Typography variant="text" color="gray">
+          <Typography variant="text" color="black">
             {todayAppointments?.length
               ? `Напоминаем, что сегодня  Вы записаны к врачу на ${humanizeTodayAppointments(
                   todayAppointments
