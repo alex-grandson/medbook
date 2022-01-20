@@ -38,7 +38,7 @@ const sidebarConfig = [
   },
   {
     title: 'Профиль врача',
-    path: '/dashboard/doctor',
+    path: '/dashboard/profile',
     icon: getIcon(shoppingBagFill),
     visibleForRoles: [ROLES.DOCTOR]
   },
