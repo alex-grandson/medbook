@@ -36,8 +36,6 @@ export default function MarkAppointmentDialog({ onClose, onShow, id }) {
   };
   const formik = useFormik({
     initialValues: {
-      doctorId: undefined,
-      patientId: userInfo.id,
       date: moment().format('YYYY-MM-DD'),
       complaints: 'Кашель Рвота',
       objectively: 'Неудовлетворительно',
@@ -50,7 +48,8 @@ export default function MarkAppointmentDialog({ onClose, onShow, id }) {
         'носовое дыхание свободное. Язык влажный, чистый. ' +
         'В легких везикулярное дыхание, хрипоты нет. ' +
         'Тоны сердца ритмичные, живой без болезненный',
-      receipt: 'Полоскание, мытье.'
+      receipt: 'Полоскание, мытье.',
+      accepted: true
     },
     onSubmit: handleMarkAppointment
   });

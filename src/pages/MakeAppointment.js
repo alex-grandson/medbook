@@ -71,7 +71,7 @@ export default function MakeAppointment() {
         diagnosis: '',
         application: '',
         receipt: '',
-        accepted: true
+        accepted: false
       };
 
       await makeAppointment(appointmentInfo);
