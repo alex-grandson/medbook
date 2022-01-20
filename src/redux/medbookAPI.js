@@ -48,6 +48,9 @@ export const medbookAPI = createApi({
     getTodayAppointments: build.query({
       query: (login = '') =>
         `appointment?${login && `patientId=${login}`}&${`date=${format(new Date(), 'yyyy-MM-dd')}`}`
+    }),
+    getUserByEmail: build.mutation({
+      query: (email = '') => `user?${email && `email=${email}`}`
     })
   })
 });
